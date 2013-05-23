@@ -29,7 +29,7 @@ class Pronamic_Sections_Admin {
 								
 				add_meta_box(
 					'pronamic-sections-meta-box',
-					__( 'Content Tabs', 'pronamic-content-tabs-domain' ),
+					__( 'Pronamic Sections', 'pronamic-sections-domain' ),
 					array( $this, 'view_section_meta_box' ),
 					$post_type,
 					'advanced',
@@ -45,13 +45,13 @@ class Pronamic_Sections_Admin {
         // Generate nonce
         $nonce = wp_nonce_field( 'pronamic_section_metabox', 'pronamic_section_metabox_nonce', true, false );
 
-        $quantity = get_post_meta( $post->ID, 'pronamic_content_tabs_quantity', true );
+        $quantity = get_post_meta( $post->ID, 'pronamic_sections_quantity', true );
 
         if ( ! isset( $quantity) )
             $quantity = '0';
 
         // Get the extra tabs
-        $extra_content = get_post_meta( $post->ID, 'pronamic_content_tabs', true );
+        $extra_content = get_post_meta( $post->ID, 'pronamic_sections', true );
 
         // Start template engine
         $view = new Pronamic_Sections_View( PRONAMIC_SECTIONS_ROOT . '/views' );
@@ -90,25 +90,17 @@ class Pronamic_Sections_Admin {
 			foreach ( $pct_content as $key => $tab ) {
 				$order[$key] = $tab['order'];
 			}
-			
-			print_r('<pre>');
-			var_dump($pct_content);
-			var_dump($order);
-			
-			
+						
 			array_multisort($order, SORT_ASC, $pct_content);
 			
-			var_dump($pct_content);
-			
-			
-            update_post_meta( $post_id, 'pronamic_content_tabs', $pct_content );    
+            update_post_meta( $post_id, 'pronamic_sections', $pct_content );    
         } else {
-			delete_post_meta( $post_id, 'pronamic_content_tabs' );
+			delete_post_meta( $post_id, 'pronamic_sections' );
 		}
         
 		
 
-        update_post_meta( $post_id, 'pronamic_content_tabs_quantity', filter_input( INPUT_POST, 'pronamic_section_quantity', FILTER_VALIDATE_INT ) );
+        update_post_meta( $post_id, 'pronamic_sections_quantity', filter_input( INPUT_POST, 'pronamic_section_quantity', FILTER_VALIDATE_INT ) );
 
 	}
 	
@@ -120,7 +112,7 @@ class Pronamic_Sections_Admin {
 			$tab_id = $_POST['tab_id'];
 			$post_id = $_POST['post_id'];
 			
-			$pct_content = get_post_meta( $post_id, 'pronamic_content_tabs', true );
+			$pct_content = get_post_meta( $post_id, 'pronamic_sections', true );
 			
 			if ( isset( $pct_content[$tab_id] ) ) {
 				unset( $pct_content[$tab_id] );
@@ -128,11 +120,11 @@ class Pronamic_Sections_Admin {
 				$resorted_pct_content = array_values( $pct_content );
 				
 				if ( ! empty( $resorted_pct_content ) ) {
-					update_post_meta( $post_id, 'pronamic_content_tabs', $resorted_pct_content );
-					update_post_meta( $post_id, 'pronamic_content_tabs_quantity', ( count( $resorted_pct_content ) - 1 ) );
+					update_post_meta( $post_id, 'pronamic_sections', $resorted_pct_content );
+					update_post_meta( $post_id, 'pronamic_sections_quantity', ( count( $resorted_pct_content ) - 1 ) );
 				} else {
-					delete_post_meta( $post_id, 'pronamic_content_tabs' );
-					delete_post_meta( $post_id, 'pronamic_content_tabs_quantity' );
+					delete_post_meta( $post_id, 'pronamic_sections' );
+					delete_post_meta( $post_id, 'pronamic_sections_quantity' );
 				}
 				
 			}

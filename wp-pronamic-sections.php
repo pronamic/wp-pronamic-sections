@@ -4,6 +4,7 @@
  * Plugin Name: Pronamic Sections
  * Author: Pronamic
  * Author URI: http://pronamic.nl
+ * Domain: pronamic-sections-domain
  */
 
 define( 'PRONAMIC_SECTIONS_FILE', __FILE__ );
@@ -21,8 +22,3 @@ if ( is_admin() ) {
 }
 
 include PRONAMIC_SECTIONS_ROOT . '/inc/template-functions.php';
-
-
-add_action( 'init', function() {
-	add_post_type_support( 'post', 'pronamic_sections' );
-});

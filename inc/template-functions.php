@@ -1,8 +1,8 @@
 <?php
 
-function pronamic_tabs( $id = null ) {
+function pronamic_sections( $id = null ) {
     if ( ! $id )
         $id = get_the_ID();
 
-    return get_post_meta( $id, 'pronamic_content_tabs', true );
+    return get_post_meta( $id, 'pronamic_sections', true );
 }
