@@ -43,7 +43,7 @@ var Pronamic_Sections_Admin = {
         },
         remove_tab: function(e) {
             e.preventDefault();
-
+			
 			jQuery.ajax({
 				type:'POST',
 				url:ajaxurl,
@@ -54,13 +54,9 @@ var Pronamic_Sections_Admin = {
 				},
 				dataType:'json',
 				success:function(data) {
-					console.log(data);
 					window.location.reload();
 				},
 				error: function(a,b,c){
-					console.log(a);
-					console.log(b);
-					console.log(c);
 				}
 			});
         },
