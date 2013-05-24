@@ -2,15 +2,20 @@
 
 class Pronamic_Sections_Admin {
     public function __construct() {
-        add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
+		add_action( 'init', array( $this, 'init' ) );
+		
+		add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
 
         add_action( 'add_meta_boxes', array( $this, 'meta_boxes' ) );
 
         add_action( 'save_post', array( $this, 'save_section_meta_box' ) );
 		
 		add_action( 'wp_ajax_remove_tab', array( $this, 'ajax_remove_tab' ) );
-		
     }
+	
+	public function init() {
+		load_plugin_textdomain( 'pronamic-sections-domain', false, dirname(plugin_basename( PRONAMIC_SECTIONS_FILE ) ) );
+	}
 
     public function assets() {
         wp_register_script( 'pronamic_sections_admin', plugins_url( '/assets/admin/pronamic_sections_admin.js', PRONAMIC_SECTIONS_FILE ), array( 'jquery', 'jquery-ui-sortable' ) );
