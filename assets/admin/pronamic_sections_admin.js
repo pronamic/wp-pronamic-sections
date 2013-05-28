@@ -24,7 +24,6 @@ var Pronamic_Sections_Admin = {
 				connectWith:".js-pronamic-sections-holder",
 				stop:Pronamic_Sections_Admin.tabs.on_sortable_stop
 			});
-			Pronamic_Sections_Admin.tabs.config.dom.tabs.disableSelection();
         },
         add_tab: function(e) {
             e.preventDefault();
