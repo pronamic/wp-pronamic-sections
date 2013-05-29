@@ -83,11 +83,11 @@ class Pronamic_Sections_Admin {
         if ( ! empty( $pct_content ) ) {
             foreach ( $pct_content as $key => $tab ) {
                 if ( isset( $tab['title'] ) ) {
-                    $pct_content[$key]['title'] = apply_filters( 'the_title', $tab['title'] );
+                    $pct_content[$key]['title'] = $tab['title'];
                 }
 
                 if ( isset( $tab['content'] ) ) {
-                    $pct_content[$key]['content'] = apply_filters( 'the_content', $tab['content'] );
+                    $pct_content[$key]['content'] = $tab['content'];
                 }
             }
 
