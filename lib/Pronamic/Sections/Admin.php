@@ -45,6 +45,9 @@ class Pronamic_Sections_Admin {
     public function assets() {
         wp_register_script( 'pronamic_sections_admin', plugins_url( '/assets/admin/pronamic_sections_admin.js', PRONAMIC_SECTIONS_FILE ), array( 'jquery', 'jquery-ui-sortable' ) );
         wp_enqueue_script( 'pronamic_sections_admin' );
+		
+		wp_register_style( 'pronamic-sections', plugins_url( '/assets/admin/pronamic-sections.css', PRONAMIC_SECTIONS_FILE ) );
+		wp_enqueue_style( 'pronamic-sections' );
     }
 
     public function meta_boxes() {
@@ -95,6 +98,7 @@ class Pronamic_Sections_Admin {
 		
 		?>
 		<div class="pronamic_sections_editor_holder">
+			<h3 class="pronamic_sections_title"><?php _e( 'Sections', 'pronamic-sections-domain' ); ?></h3>
 			<?php if ( ! empty( $all_sections ) ) : ?>
 				<?php foreach ( $all_sections as $section ) : ?>
 					<?php $section_class = new Pronamic_Sections_Section( $section ); ?>

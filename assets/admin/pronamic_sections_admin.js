@@ -56,7 +56,7 @@ Pronamic_Section.prototype = {
         });
     }
     
-    , addSection: function( post_title ) {
+    , add: function( post_title ) {
         jQuery.ajax({
               type: 'POST'
             , url: ajaxurl
@@ -78,7 +78,7 @@ Pronamic_Section.prototype = {
     /**
      * Removes a section entirely.
      */
-    ,  removeSection: function() {
+    ,  remove: function() {
         
     }
 };
@@ -95,7 +95,42 @@ jQuery( function( $ ) {
             
         
         var section = new Pronamic_Section( post_id );
-        section.addSection( post_title );
+        section.add( post_title );
     } );
     
+    $( '.jPronamicSectionExistingMoveUp' ).click( function( e ) {
+        e.preventDefault();
+        
+        var self       = $( this ),
+            post_id    = self.data( 'post-id' ),
+            position   = self.data( 'position' ),
+            current_id = self.data( 'current-id' );
+        
+        var section = new Pronamic_Section( post_id, current_id, position );
+        section.moveUp();
+    } );
+    
+    $( '.jPronamicSectionExistingMoveDown' ).click( function( e ) {
+        e.preventDefault();
+        
+        var self       = $( this ),
+            post_id    = self.data( 'post-id' ),
+            position   = self.data( 'position' ),
+            current_id = self.data( 'current-id' );
+        
+        var section = new Pronamic_Section( post_id, current_id, position );
+        section.moveDown();
+    } );
+    
+    $( '.jPronamicSectionExistingRemove' ).click( function( e ) {
+        e.preventDefault();
+        
+        var self       = $( this ),
+            post_id    = self.data( 'post-id' ),
+            position   = self.data( 'position' ),
+            current_id = self.data( 'current-id' );
+        
+        var section = new Pronamic_Section( post_id, current_id, position );
+        section.removeSection();
+    } );
 } );

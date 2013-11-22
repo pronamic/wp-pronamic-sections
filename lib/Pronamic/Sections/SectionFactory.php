@@ -31,7 +31,7 @@ class Pronamic_Sections_SectionFactory {
 		if ( ! $above_section_query->have_posts() )
 			return null;
 		
-		return $above_section_query->post;
+		return new Pronamic_Sections_Section( $above_section_query->post );
 	}
 	
 	/**
@@ -65,7 +65,7 @@ class Pronamic_Sections_SectionFactory {
 		if ( ! $below_section_query->have_posts() )
 			return null;
 		
-		return $below_section_query->post;
+		return new Pronamic_Sections_Section( $below_section_query->post );
 	}
 	
 	/**
@@ -83,7 +83,8 @@ class Pronamic_Sections_SectionFactory {
 			'nopaging'            => true,
 			'ignore_sticky_posts' => true,
 			'meta_key'            => '_pronamic_section_position',
-			'orderby'             => 'meta_value_num'
+			'orderby'             => 'meta_value_num',
+			'order'               => 'ASC'
 		) );
 		
 		if ( ! $sections_query->have_posts() )
@@ -141,7 +142,7 @@ class Pronamic_Sections_SectionFactory {
 			return 0;
 		
 		// Get the last section
-		$last_section_post = end( $sections );
+		$last_section_post = reset( $sections );
 		
 		$last_section = new Pronamic_Sections_Section( $last_section_post );
 		$last_section_position = $last_section->get_position();
