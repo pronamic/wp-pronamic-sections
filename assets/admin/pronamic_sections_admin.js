@@ -1,73 +1,101 @@
-var Pronamic_Sections_Admin = {
-    config: {},
-    ready: function() {
-        Pronamic_Sections_Admin.tabs.ready();
-    },
-    tabs: {
-        config: {},
-        ready: function() {
-            Pronamic_Sections_Admin.tabs.config.dom = {
-                add_button: jQuery('.js-pronamic-sections-add-tab'),
-                remove_button: jQuery('.js-pronamic-section-delete'),
-                quantity: jQuery('.js-pronamic-sections-quantity'),
-				tabs: jQuery('.js-pronamic-sections-holder'),
-				order: jQuery('.js-pronamic-sections-order')
-            };
+var Pronamic_Section = function( post_id, id, position ) {
+    this.post_id  = post_id;
+    
+    if ( undefined === id )
+        id = null;
+    
+    if ( undefined === position )
+        position = null;
+    
+    this.id       = id;
+    this.position = position;
+};
 
-            Pronamic_Sections_Admin.tabs.binds();
-        },
-        binds: function() {
-            Pronamic_Sections_Admin.tabs.config.dom.add_button.click(Pronamic_Sections_Admin.tabs.add_tab);
-            Pronamic_Sections_Admin.tabs.config.dom.remove_button.click(Pronamic_Sections_Admin.tabs.remove_tab);
-			
-			Pronamic_Sections_Admin.tabs.config.dom.tabs.sortable({
-				connectWith:".js-pronamic-sections-holder",
-				stop:Pronamic_Sections_Admin.tabs.on_sortable_stop
-			});
-        },
-        add_tab: function(e) {
-            e.preventDefault();
-            var current_quantity = Pronamic_Sections_Admin.tabs.config.dom.quantity.val();
-			
-            if( '' === current_quantity ) current_quantity = 0;
-
-			current_quantity = parseInt( current_quantity );
-
-            var new_quantity = current_quantity + 1;
-			console.log(new_quantity);
-			
-            Pronamic_Sections_Admin.tabs.config.dom.quantity.val(new_quantity);
-
-            jQuery('#post').submit();
-        },
-        remove_tab: function(e) {
-            e.preventDefault();
-			
-			jQuery.ajax({
-				type:'POST',
-				url:ajaxurl,
-				data:{
-					action:'remove_tab',
-					tab_id:jQuery(this).data('id'),
-					post_id:jQuery('input[name=post_ID]').val()
-				},
-				dataType:'json',
-				success:function(data) {
-					window.location.reload();
-				},
-				error: function(a,b,c){
-				}
-			});
-        },
-		on_sortable_stop: function() {
-			var order = jQuery('.js-pronamic-sections-order');
-			var nbElems = order.length;
-			jQuery('.js-pronamic-sections-order').each(function(id){
-				jQuery(this).val(nbElems + id);
-			});
-		}
+Pronamic_Section.prototype = {
+    /**
+     * Makes an AJAX request to move the current Section
+     * up a position
+     */
+     moveUp: function() {
+        jQuery.ajax({
+              type: 'POST'
+            , url: ajaxurl
+            , data: {
+                  action: 'pronamic_section_move_up'
+                , post_id: this.post_id
+                , current_id: this.id
+                , position: this.position
+            }
+            , dataType: 'json'
+            , success: function( data ) {
+                console.log( data );
+            }
+            , failed: function(one,two,three) {
+                console.log(one,two,three);
+            }
+        });
+    }
+    
+    , moveDown: function() {
+        jQuery.ajax({
+              type: 'POST'
+            , url: ajaxurl
+            , data: {
+                  action: 'pronamic_section_move_down'
+                , post_id: this.post_id
+                , current_id: this.id
+                , position: this.position
+            }
+            , dataType: 'json'
+            , success: function( data ) {
+                console.log( data );
+            }
+            , failed: function( one, two, three ) {
+                console.log( one, two, three );
+            }
+        });
+    }
+    
+    , addSection: function( post_title ) {
+        jQuery.ajax({
+              type: 'POST'
+            , url: ajaxurl
+            , data: {
+                  action: 'pronamic_section_add'
+                , post_id: this.post_id
+                , post_title: post_title
+            }
+            , dataType: 'json'
+            , success: function( data ) {
+                console.log(data);
+            }
+            , failed: function( one, two, three ) {
+                console.log(one,two,three);
+            }
+        });
+    }
+    
+    /**
+     * Removes a section entirely.
+     */
+    ,  removeSection: function() {
+        
     }
 };
 
-jQuery(Pronamic_Sections_Admin.ready);
-
+// Listeners
+jQuery( function( $ ) {
+    
+    $( '.jPronamicSectionNewButton' ).click( function( e ) {
+        e.preventDefault();
+        
+        var self = $( this ),
+            post_id = self.data( 'post-id' ),
+            post_title = self.siblings( '.jPronamicSectionNewTitle' ).val();
+            
+        
+        var section = new Pronamic_Section( post_id );
+        section.addSection( post_title );
+    } );
+    
+} );

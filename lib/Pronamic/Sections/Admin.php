@@ -11,10 +11,35 @@ class Pronamic_Sections_Admin {
         add_action( 'save_post', array( $this, 'save_section_meta_box' ) );
 		
 		add_action( 'wp_ajax_remove_tab', array( $this, 'ajax_remove_tab' ) );
+		
+		add_action( 'edit_form_advanced', array( $this, 'show_sections' ) );
+		
+		add_action( 'wp_ajax_pronamic_section_move_up', array( $this, 'ajax_pronamic_section_move_up' ) );
+		add_action( 'wp_ajax_pronamic_section_move_down', array( $this, 'ajax_pronamic_section_move_down' ) );
+		add_action( 'wp_ajax_pronamic_section_add', array( $this, 'ajax_pronamic_section_add' ) );
     }
 	
 	public function init() {
 		load_plugin_textdomain( 'pronamic-sections-domain', false, dirname(plugin_basename( PRONAMIC_SECTIONS_FILE ) ) );
+		
+		// Register the new internal post type
+		register_post_type( 'pronamic_section', array(
+			'labels' => array(
+				'name' => _x( 'Sections', 'Plural Name for Pronamic Section Post', 'pronamic-sections-domain' ),
+				'singular_name' => _x( 'Section', 'Singular Name for the Pronamic Section Post', 'pronamic-sections-domain' )
+			),
+			'public'            => false,
+			'publicly_querable' => false,
+			'show_ui'           => false,
+			'show_in_menu'      => false,
+			'query_var'         => false,
+			'rewrite'           => null,
+			'capability_type'   => 'post',
+			'has_archive'       => false,
+			'hierarchical'      => false,
+			'menu_position'     => null,
+			'supports'          => array( 'title', 'editor' )
+		) );
 	}
 
     public function assets() {
@@ -46,96 +71,94 @@ class Pronamic_Sections_Admin {
     }
 
     public function view_section_meta_box( $post ) {
-
-        // Generate nonce
-        $nonce = wp_nonce_field( 'pronamic_section_metabox', 'pronamic_section_metabox_nonce', true, false );
-
-        $quantity = get_post_meta( $post->ID, 'pronamic_sections_quantity', true );
-
-        if ( ! isset( $quantity) )
-            $quantity = '0';
-
-        // Get the extra tabs
-        $extra_content = get_post_meta( $post->ID, 'pronamic_sections', true );
-
+		// Get all sections
+		$all_sections = Pronamic_Sections_SectionFactory::get_all_sections( $post->ID );
+		
         // Start template engine
         $view = new Pronamic_Sections_View( PRONAMIC_SECTIONS_ROOT . '/views' );
         $view
             ->set_view( 'view_section_meta_box' )
-            ->set( 'nonce', $nonce )
-            ->set( 'quantity', $quantity )
-            ->set( 'tabs', $extra_content )
-            ->render();
+			->set( 'sections', $all_sections )
+			->set( 'post_id', $post->ID )
+			->render();
     }
 
     public function save_section_meta_box( $post_id ) {
-        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-            return;
-
-        if ( ! isset( $_POST['pronamic_section_metabox_nonce'] ) )
-            return;
-
-        if ( ! wp_verify_nonce( $_POST['pronamic_section_metabox_nonce'], 'pronamic_section_metabox' ) )
-            return;
-
-        $pct_content = $_POST['pct_content'];
-
-        if ( ! empty( $pct_content ) ) {
-            foreach ( $pct_content as $key => $tab ) {
-                if ( isset( $tab['title'] ) ) {
-                    $pct_content[$key]['title'] = $tab['title'];
-                }
-
-                if ( isset( $tab['content'] ) ) {
-                    $pct_content[$key]['content'] = $tab['content'];
-                }
-            }
-
-			$order = array();
-			foreach ( $pct_content as $key => $tab ) {
-				$order[$key] = $tab['order'];
-			}
-						
-			array_multisort($order, SORT_ASC, $pct_content);
-			
-            update_post_meta( $post_id, 'pronamic_sections', $pct_content );    
-        } else {
-			delete_post_meta( $post_id, 'pronamic_sections' );
-		}
         
-		
-
-        update_post_meta( $post_id, 'pronamic_sections_quantity', filter_input( INPUT_POST, 'pronamic_section_quantity', FILTER_VALIDATE_INT ) );
 
 	}
 	
-	public function ajax_remove_tab() {
+	public function show_sections( $post ) {
 		
+		// Get all sections
+		$all_sections = Pronamic_Sections_SectionFactory::get_all_sections( $post->ID );
 		
-		if ( isset( $_POST['tab_id'] ) ) {
-			
-			$tab_id = $_POST['tab_id'];
-			$post_id = $_POST['post_id'];
-			
-			$pct_content = get_post_meta( $post_id, 'pronamic_sections', true );
-			
-			if ( isset( $pct_content[$tab_id] ) ) {
-				unset( $pct_content[$tab_id] );
-				
-				$resorted_pct_content = array_values( $pct_content );
-				
-				if ( ! empty( $resorted_pct_content ) ) {
-					update_post_meta( $post_id, 'pronamic_sections', $resorted_pct_content );
-					update_post_meta( $post_id, 'pronamic_sections_quantity', ( count( $resorted_pct_content ) - 1 ) );
-				} else {
-					delete_post_meta( $post_id, 'pronamic_sections' );
-					delete_post_meta( $post_id, 'pronamic_sections_quantity' );
-				}
-				
-			}
-			
-		}
+		?>
+		<div class="pronamic_sections_editor_holder">
+			<?php if ( ! empty( $all_sections ) ) : ?>
+				<?php foreach ( $all_sections as $section ) : ?>
+					<?php $section_class = new Pronamic_Sections_Section( $section ); ?>
+					<div class="pronamic_section_holder" data-id="<?php echo $section->ID; ?>" data-position="<?php echo $section_class->get_position(); ?>">
+						<input type="text" value="<?php echo $section->post_title; ?>"/>
+						<?php wp_editor( $section->post_content, 'pronamic-section-editor-' . $section->ID ); ?>
+					</div>
+				<?php endforeach; ?>
+			<?php else: ?>
+			<p>
+				<?php _e( 'You have no sections yet. To start, add a section in the meta box!', 'pronamic-sections-domain' ); ?>
+			</p>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
+	
+	public function ajax_pronamic_section_move_up() {
+		// Determine it is an ajax request
+		if ( ! DOING_AJAX )
+			return;
 		
+		// Get the required post information
+		$current_id = filter_input( INPUT_POST, 'current_id', FILTER_SANITIZE_NUMBER_INT );
+		$post_id    = filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
+		$position   = filter_input( INPUT_POST, 'position', FILTER_SANITIZE_NUMBER_INT );
+		
+		// Get the section above this one
+		$above_section = Pronamic_Sections_SectionFactory::get_above_section( $post_id, $position );
+		
+		// Get this section
+		$section = Pronamic_Sections_Section::get_instance( $current_id );
+		$section->move_up( $above_section );
+	}
+	
+	public function ajax_pronamic_section_move_down() {
+		if ( ! DOING_AJAX )
+			return;
+		
+		// Get the required post information
+		$current_id = filter_input( INPUT_POST, 'current_id', FILTER_SANITIZE_NUMBER_INT );
+		$post_id    = filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
+		$position   = filter_input( INPUT_POST, 'position', FILTER_SANITIZE_NUMBER_INT );
+		
+		// Get the section below this one
+		$below_section = Pronamic_Sections_SectionFactory::get_below_section( $post_id, $position );
+		
+		// Get this section
+		$section = Pronamic_Sections_Section::get_instance( $current_id );
+		$section->move_down( $below_section );
+	}
+	
+	public function ajax_pronamic_section_add() {
+		if ( ! DOING_AJAX )
+			return;
+		
+		// Get the required post information
+		$parent_id    = filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
+		$post_title   = filter_input( INPUT_POST, 'post_title', FILTER_UNSAFE_RAW );
+		
+		// Add the new section
+		$section = Pronamic_Sections_SectionFactory::insert_section( $parent_id, $post_title );
+		
+		echo json_encode( array( 'section' => $section ) );
 		exit;
 	}
 }
