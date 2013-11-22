@@ -86,6 +86,22 @@ Pronamic_Section.prototype = {
 // Listeners
 jQuery( function( $ ) {
     
+    var textAreas = $( '#poststuff' ).find( 'textarea.wp-editor-area' );
+    
+    $.each( textAreas, function( index, element ) {
+        var editor = tinyMCE.EditorManager.get( element.id );
+        
+        if ( editor ) {
+            console.log( 'SOME: ',element.id );
+            tinyMCE.execCommand( 'mceRemoveControl', true, element.id );
+        }
+        
+        if ( ! editor ) {
+            console.log( 'NONE: ', element.id);
+            tinyMCE.execCommand( 'mceAddControl', true, element.id );
+        }
+    } );
+    
     $( '.jPronamicSectionNewButton' ).click( function( e ) {
         e.preventDefault();
         
