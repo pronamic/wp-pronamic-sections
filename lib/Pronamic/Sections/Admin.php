@@ -12,6 +12,7 @@ class Pronamic_Sections_Admin {
 		
 		add_action( 'wp_ajax_remove_tab', array( $this, 'ajax_remove_tab' ) );
 		
+		add_action( 'edit_page_form', array( $this, 'show_sections' ) );
 		add_action( 'edit_form_advanced', array( $this, 'show_sections' ) );
 		
 		add_action( 'wp_ajax_pronamic_section_move_up', array( $this, 'ajax_pronamic_section_move_up' ) );
@@ -92,10 +93,9 @@ class Pronamic_Sections_Admin {
 	}
 	
 	public function show_sections( $post ) {
-		
 		// Get all sections
 		$all_sections = Pronamic_Sections_SectionFactory::get_all_sections( $post->ID );
-		
+		var_dump($all_sections);
 		?>
 		<div class="pronamic_sections_editor_holder">
 			<h3 class="pronamic_sections_title"><?php _e( 'Sections', 'pronamic-sections-domain' ); ?></h3>
