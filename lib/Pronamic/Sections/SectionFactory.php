@@ -142,7 +142,7 @@ class Pronamic_Sections_SectionFactory {
 			return 0;
 		
 		// Get the last section
-		$last_section_post = reset( $sections );
+		$last_section_post = end( $sections );
 		
 		$last_section = new Pronamic_Sections_Section( $last_section_post );
 		$last_section_position = $last_section->get_position();
