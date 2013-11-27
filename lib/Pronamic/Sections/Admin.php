@@ -5,10 +5,6 @@ class Pronamic_Sections_Admin {
 		add_action( 'init', array( $this, 'init' ) );
 		
 		add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
-
-        add_action( 'add_meta_boxes', array( $this, 'meta_boxes' ) );
-
-        add_action( 'save_post', array( $this, 'save_section_meta_box' ) );
 		
 		add_action( 'wp_ajax_remove_tab', array( $this, 'ajax_remove_tab' ) );
 		
@@ -50,70 +46,17 @@ class Pronamic_Sections_Admin {
 		wp_register_style( 'pronamic-sections', plugins_url( '/assets/admin/pronamic-sections.css', PRONAMIC_SECTIONS_FILE ) );
 		wp_enqueue_style( 'pronamic-sections' );
     }
-
-    public function meta_boxes() {
-
-		$post_types = get_post_types( '', 'names' );
-		
-		// Go through every post type
-		foreach ( $post_types as $post_type ) {
-			
-			// Look for supports = array( 'pronamic_sections' ) from a post type
-			if ( post_type_supports( $post_type, 'pronamic_sections' ) ) {
-								
-				add_meta_box(
-					'pronamic-sections-meta-box',
-					__( 'Pronamic Sections', 'pronamic-sections-domain' ),
-					array( $this, 'view_section_meta_box' ),
-					$post_type,
-					'advanced',
-					'high'
-				);
-			}
-		}
-        
-    }
-
-    public function view_section_meta_box( $post ) {
-		// Get all sections
-		$all_sections = Pronamic_Sections_SectionFactory::get_all_sections( $post->ID );
-		
-        // Start template engine
-        $view = new Pronamic_Sections_View( PRONAMIC_SECTIONS_ROOT . '/views' );
-        $view
-            ->set_view( 'view_section_meta_box' )
-			->set( 'sections', $all_sections )
-			->set( 'post_id', $post->ID )
-			->render();
-    }
-
-    public function save_section_meta_box( $post_id ) {
-        
-
-	}
 	
 	public function show_sections( $post ) {
 		// Get all sections
 		$all_sections = Pronamic_Sections_SectionFactory::get_all_sections( $post->ID );
-		var_dump($all_sections);
-		?>
-		<div class="pronamic_sections_editor_holder">
-			<h3 class="pronamic_sections_title"><?php _e( 'Sections', 'pronamic-sections-domain' ); ?></h3>
-			<?php if ( ! empty( $all_sections ) ) : ?>
-				<?php foreach ( $all_sections as $section ) : ?>
-					<?php $section_class = new Pronamic_Sections_Section( $section ); ?>
-					<div class="pronamic_section_holder" data-id="<?php echo $section->ID; ?>" data-position="<?php echo $section_class->get_position(); ?>">
-						<input type="text" value="<?php echo $section->post_title; ?>"/>
-						<?php wp_editor( $section->post_content, 'pronamic-section-editor-' . $section->ID ); ?>
-					</div>
-				<?php endforeach; ?>
-			<?php else: ?>
-			<p>
-				<?php _e( 'You have no sections yet. To start, add a section in the meta box!', 'pronamic-sections-domain' ); ?>
-			</p>
-			<?php endif; ?>
-		</div>
-		<?php
+		
+		$view = new Pronamic_Sections_View( PRONAMIC_SECTIONS_ROOT . '/views' );
+		$view
+			->set_view( 'show_sections' )
+			->set( 'sections', $all_sections )
+			->set( 'post_id', $post->ID )
+			->render();
 	}
 	
 	public function ajax_pronamic_section_move_up() {
@@ -162,7 +105,9 @@ class Pronamic_Sections_Admin {
 		// Add the new section
 		$section = Pronamic_Sections_SectionFactory::insert_section( $parent_id, $post_title );
 		
-		echo json_encode( array( 'section' => $section ) );
-		exit;
+		wp_send_json( array(
+			'ret' => true,
+			'msg' => __( 'Successfully added a new section. Update the post to see it!', 'pronamic-sections-domain' )
+		) );
 	}
 }
