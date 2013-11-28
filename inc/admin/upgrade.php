@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Get previous sections
 $existing_posts_with_sections_query = new WP_Query( array(
