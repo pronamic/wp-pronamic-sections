@@ -45,7 +45,7 @@ class Pronamic_WP_Sections_Admin {
 		$db_version = get_option( 'pronamic_sections_version' );
 		
 		if ( empty( $db_version ) )
-			include_once PRONAMIC_SECTIONS_ROOT . '/inc/admin/upgrade.php';
+			include_once PRONAMIC_SECTIONS_ROOT . '/includes/admin/upgrade.php';
 	}
 
     public function assets() {

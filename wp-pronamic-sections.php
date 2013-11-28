@@ -26,4 +26,4 @@ if ( is_admin() ) {
 	$pronamic_sections_admin = new Pronamic_WP_Sections_Admin();
 }
 
-include PRONAMIC_SECTIONS_ROOT . '/inc/template-functions.php';
+include PRONAMIC_SECTIONS_ROOT . '/includes/template-functions.php';
