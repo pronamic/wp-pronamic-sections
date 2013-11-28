@@ -5,7 +5,7 @@
  * Author: Pronamic
  * Author URI: http://pronamic.nl
  * Domain: pronamic-sections-domain
- * Version: 1.0.0
+ * Version: 1.1.0
  */
 
 define( 'PRONAMIC_SECTIONS_FILE', __FILE__ );
