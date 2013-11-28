@@ -110,6 +110,7 @@ class Pronamic_Sections_SectionFactory {
 			'post_type' => 'pronamic_section',
 			'post_parent' => $parent_id,
 			'post_title' => $title,
+			'post_status' => 'publish'
 		) );
 		
 		if ( ! $section_id )
