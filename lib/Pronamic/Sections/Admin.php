@@ -3,6 +3,7 @@
 class Pronamic_Sections_Admin {
     public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		
 		add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
 		
@@ -37,6 +38,14 @@ class Pronamic_Sections_Admin {
 			'menu_position'     => null,
 			'supports'          => array( 'title', 'editor' )
 		) );
+	}
+	
+	public function admin_init() {
+		
+		$db_version = get_option( 'pronamic_sections_version' );
+		
+		if ( empty( $db_version ) )
+			include_once PRONAMIC_SECTIONS_ROOT . '/inc/admin/upgrade.php';
 	}
 
     public function assets() {
