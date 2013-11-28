@@ -9,7 +9,7 @@ class Pronamic_Sections_Section {
 	
 	public $ID;
 	
-	private $post;
+	public $post;
 	
 	private $position;
 	
