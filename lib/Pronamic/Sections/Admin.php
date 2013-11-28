@@ -78,9 +78,6 @@ class Pronamic_Sections_Admin {
 			
 			if ( is_a( $section, 'Pronamic_Sections_Section' ) ) {
 				$is_updated = $section->update( $section_post['post_title'], $section_post['post_content'] );
-			
-				if ( $is_updated )
-					$section->set_position( $section_post['position'] );
 			}
 		}
 		
@@ -95,14 +92,20 @@ class Pronamic_Sections_Admin {
 		// Get the required post information
 		$current_id = filter_input( INPUT_POST, 'current_id', FILTER_SANITIZE_NUMBER_INT );
 		$post_id    = filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
-		$position   = filter_input( INPUT_POST, 'position', FILTER_SANITIZE_NUMBER_INT );
+		
+		// Get this section
+		$section = Pronamic_Sections_Section::get_instance( $current_id );
+		$position = $section->get_position();
 		
 		// Get the section above this one
 		$above_section = Pronamic_Sections_SectionFactory::get_above_section( $post_id, $position );
 		
-		// Get this section
-		$section = Pronamic_Sections_Section::get_instance( $current_id );
 		$section->move_up( $above_section );
+		
+		wp_send_json( array(
+			'ret' => true,
+			'msg' => sprintf( __( 'Successfully moved the %s section up. Refresh to see the changes', 'pronamic-sections-domain' ), $section->post->post_title )
+		) );
 	}
 	
 	public function ajax_pronamic_section_move_down() {
@@ -112,14 +115,21 @@ class Pronamic_Sections_Admin {
 		// Get the required post information
 		$current_id = filter_input( INPUT_POST, 'current_id', FILTER_SANITIZE_NUMBER_INT );
 		$post_id    = filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
-		$position   = filter_input( INPUT_POST, 'position', FILTER_SANITIZE_NUMBER_INT );
+		
+		// Get this section
+		$section = Pronamic_Sections_Section::get_instance( $current_id );
+		$position = $section->get_position();
 		
 		// Get the section below this one
 		$below_section = Pronamic_Sections_SectionFactory::get_below_section( $post_id, $position );
 		
-		// Get this section
-		$section = Pronamic_Sections_Section::get_instance( $current_id );
+		// Move the section down
 		$section->move_down( $below_section );
+		
+		wp_send_json( array(
+			'ret' => true,
+			'msg' => sprintf( __( 'Successfully moved the %s section down. Refresh to see the changes', 'pronamic-sections-domain' ), $section->post->post_title )
+		) );
 	}
 	
 	public function ajax_pronamic_section_add() {
@@ -135,7 +145,7 @@ class Pronamic_Sections_Admin {
 		
 		wp_send_json( array(
 			'ret' => true,
-			'msg' => __( 'Successfully added a new section. Update the post to see it!', 'pronamic-sections-domain' )
+			'msg' => sprintf( __( 'Successfully added a new section: %s. Update the post to see it!', 'pronamic-sections-domain' ), $post_title )
 		) );
 	}
 	
