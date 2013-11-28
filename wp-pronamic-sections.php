@@ -13,8 +13,8 @@ define( 'PRONAMIC_SECTIONS_ROOT', dirname( __FILE__ ) );
 define( 'PRONAMIC_SECTIONS_FOLDER', basename( PRONAMIC_SECTIONS_ROOT ) );
 
 // Required classes
-	include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/Sections/Section.php';
-	include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/Sections/SectionFactory.php';
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/Sections/Section.php';
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/Sections/SectionFactory.php';
 
 // Load the admin!
 if ( is_admin() ) {
