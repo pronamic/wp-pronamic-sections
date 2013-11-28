@@ -1,0 +1,58 @@
+.pronamic_sections_order_existing_list {
+    display: block;
+}
+
+    .pronamic_section_buttons {
+        display: block;
+        margin-top: 10px;
+        
+        *zoom: 1;
+    }
+    
+    .pronamic_section_buttons:before,
+    .pronamic_section_buttons:after {
+        content: " "; /* 1 */
+        display: table; /* 2 */
+    }
+
+    .pronamic_section_buttons:after {
+        clear: both;
+    }
+
+        .pronamic_section_button_delete {
+            float: right;
+        }
+        
+        
+.pronamic_sections_editor_holder {
+    
+}
+
+    .pronamic_sections_title {
+        cursor: pointer !important;
+    }
+    
+    .pronamic_sections_handle {
+        height:42px !important;
+    }
+
+    .pronamic_section_holder {
+    }
+    
+    .pronamic_section_editor {
+        background: #fff;
+    }
+    
+.pronamic_sections_add_holder {
+    margin-bottom: 10px;
+}
+    
+.pronamic_section_notification {
+    display: block;
+    margin-bottom: 10px;
+    padding: 4px;
+    
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 5px;
+}
