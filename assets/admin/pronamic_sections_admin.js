@@ -217,4 +217,11 @@ jQuery( function( $ ) {
     $( '.jPronamicSectionName' ).click( function( e ) {
         e.stopPropagation();
     } );
+    
+    $( '.jPronamicSectionsTitle' ).click( function( e ) {
+        var self = $( this ),
+            editor = tinyMCE.EditorManager.get( 'pronamic_section_editor_' + self.data( 'id' ) );
+            
+        editor.theme.resizeTo( '100%', '300' );
+    } );
 } );
