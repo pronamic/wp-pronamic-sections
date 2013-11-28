@@ -6,8 +6,6 @@ class Pronamic_Sections_Admin {
 		
 		add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
 		
-		add_action( 'wp_ajax_remove_tab', array( $this, 'ajax_remove_tab' ) );
-		
 		add_action( 'edit_page_form', array( $this, 'show_sections' ) );
 		add_action( 'edit_form_advanced', array( $this, 'show_sections' ) );
 		add_action( 'save_post', array( $this, 'save_sections' ), 10, 2 );
