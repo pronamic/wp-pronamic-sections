@@ -40,6 +40,11 @@ Mail support@pronamic.nl
 
 == Changelog ==
 
+= 1.1.0 =
+* REFACTOR: Moved the classes into the WP namespace, now Pronamic/WP/Sections instead of Pronamic/Sections
+* REFACTOR: Changed inc folder to includes
+* REFACTOR: Removed the 'wp-' prefix from the core plugin file
+
 = 1.0 =
 * REFACTOR: Now uses a custom post type.
 * REFACTOR: Better display of the WYSIWYG areas.
