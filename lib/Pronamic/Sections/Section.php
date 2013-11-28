@@ -92,11 +92,12 @@ class Pronamic_Sections_Section {
 	 * @return \Pronamic_Sections_Section
 	 */
 	public function move_up( Pronamic_Sections_Section $above_section ) {
+		$old_above_position = $above_section->get_position();
 		// Set the position of the one above, to this current position
 		$above_section->set_position( $this->position );
 		
 		// Lowers the number, so it goes higher
-		$new_position = $this->position - 1;
+		$new_position = $old_above_position;
 		$this->set_position( $new_position );
 		
 		return $this;
@@ -111,11 +112,12 @@ class Pronamic_Sections_Section {
 	 * @return \Pronamic_Sections_Section
 	 */
 	public function move_down( Pronamic_Sections_Section $below_section ) {
+		$old_below_position = $below_section->get_position();
 		// Get the section below this one
 		$below_section->set_position( $this->position );
 		
 		// Increase the number, so it goes lower
-		$new_position = $this->position + 1;
+		$new_position = $old_below_position;
 		$this->set_position( $new_position );
 		
 		return $this;
