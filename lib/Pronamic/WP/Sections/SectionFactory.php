@@ -1,6 +1,6 @@
 <?php
 
-class Pronamic_Sections_SectionFactory {
+class Pronamic_WP_Sections_SectionFactory {
 	
 	/**
 	 * Returns the section above the current passed in position.
@@ -31,7 +31,7 @@ class Pronamic_Sections_SectionFactory {
 		if ( ! $above_section_query->have_posts() )
 			return null;
 		
-		return new Pronamic_Sections_Section( $above_section_query->post );
+		return new Pronamic_WP_Sections_Section( $above_section_query->post );
 	}
 	
 	/**
@@ -65,7 +65,7 @@ class Pronamic_Sections_SectionFactory {
 		if ( ! $below_section_query->have_posts() )
 			return null;
 		
-		return new Pronamic_Sections_Section( $below_section_query->post );
+		return new Pronamic_WP_Sections_Section( $below_section_query->post );
 	}
 	
 	/**
@@ -103,7 +103,7 @@ class Pronamic_Sections_SectionFactory {
 	 * @param string $title
 	 * @param string $content
 	 * @param int $position
-	 * @return Pronamic_Sections_Section|false
+	 * @return Pronamic_WP_Sections_Section|false
 	 */
 	public static function insert_section( $parent_id, $title, $position = null ) {
 		$section_id = wp_insert_post( array(
@@ -117,7 +117,7 @@ class Pronamic_Sections_SectionFactory {
 			return false;
 		
 		// Get the section
-		$section = Pronamic_Sections_Section::get_instance( $section_id );
+		$section = Pronamic_WP_Sections_Section::get_instance( $section_id );
 		
 		if ( null === $position )
 			$position = self::get_next_free_position( $parent_id );
@@ -145,7 +145,7 @@ class Pronamic_Sections_SectionFactory {
 		// Get the last section
 		$last_section_post = end( $sections );
 		
-		$last_section = new Pronamic_Sections_Section( $last_section_post );
+		$last_section = new Pronamic_WP_Sections_Section( $last_section_post );
 		$last_section_position = $last_section->get_position();
 		$last_section_position++;
 		

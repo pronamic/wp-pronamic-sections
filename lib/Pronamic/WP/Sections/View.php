@@ -4,7 +4,7 @@
  * Component Version: 1.0
  * Class Version: 1.0
  */
-class Pronamic_Sections_View
+class Pronamic_WP_Sections_View
 {
     /**
      * Full root location to folder that holds this
