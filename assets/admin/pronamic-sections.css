@@ -2,28 +2,21 @@
     display: block;
 }
 
-    .pronamic_sections_order_existing_list li {
+    .pronamic_section_buttons {
         display: block;
         padding: 5px 8px;
-        
-        background: #fff;
-        border: 1px solid #ccc;
         
         *zoom: 1;
     }
     
-    .pronamic_sections_order_existing_list li:before,
-    .pronamic_sections_order_existing_list li:after {
+    .pronamic_section_buttons:before,
+    .pronamic_section_buttons:after {
         content: " "; /* 1 */
         display: table; /* 2 */
     }
 
-    .pronamic_sections_order_existing_list li:after {
+    .pronamic_section_buttons:after {
         clear: both;
-    }
-    
-    .pronamic_section_buttons {
-        float: right;
     }
     
         .pronamic_section_move_up_button,
@@ -59,21 +52,34 @@
         
         
 .pronamic_sections_editor_holder {
-    padding: 20px;
     
-    border: 1px dashed #ccc;
 }
 
     .pronamic_sections_title {
-        margin-bottom: 20px !important;
-        padding-left: 5px !important;
-        
-        border-bottom: 1px dashed #ccc;
+        cursor: pointer !important;
+    }
+    
+    .pronamic_sections_handle {
+        height:42px !important;
     }
 
     .pronamic_section_holder {
-        margin-bottom: 20px;
-        padding-bottom: 20px;
-        
-        border-bottom: 1px dashed #ccc;
     }
+    
+    .pronamic_section_editor {
+        background: #fff;
+    }
+    
+.pronamic_sections_add_holder {
+    margin-bottom: 10px;
+}
+    
+.pronamic_section_notification {
+    display: block;
+    margin-bottom: 10px;
+    padding: 4px;
+    
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 5px;
+}
