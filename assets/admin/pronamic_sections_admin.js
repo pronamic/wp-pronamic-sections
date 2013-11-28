@@ -18,7 +18,8 @@ Pronamic_Section.prototype = {
      */
      moveUp: function() {
         jQuery.ajax({
-              type: 'POST'
+              context: this
+            , type: 'POST'
             , url: ajaxurl
             , data: {
                   action: 'pronamic_section_move_up'
@@ -27,18 +28,15 @@ Pronamic_Section.prototype = {
                 , position: this.position
             }
             , dataType: 'json'
-            , success: function( data ) {
-                console.log( data );
-            }
-            , failed: function(one,two,three) {
-                console.log(one,two,three);
-            }
+            , success: this.success
+            , failed: this.failed
         });
     }
     
     , moveDown: function() {
         jQuery.ajax({
-              type: 'POST'
+              context: this
+            , type: 'POST'
             , url: ajaxurl
             , data: {
                   action: 'pronamic_section_move_down'
@@ -47,18 +45,15 @@ Pronamic_Section.prototype = {
                 , position: this.position
             }
             , dataType: 'json'
-            , success: function( data ) {
-                console.log( data );
-            }
-            , failed: function( one, two, three ) {
-                console.log( one, two, three );
-            }
+            , success: this.success
+            , failed: this.failed
         });
     }
     
     , add: function( post_title ) {
         jQuery.ajax({
-              type: 'POST'
+              context: this
+            , type: 'POST'
             , url: ajaxurl
             , data: {
                   action: 'pronamic_section_add'
@@ -66,12 +61,8 @@ Pronamic_Section.prototype = {
                 , post_title: post_title
             }
             , dataType: 'json'
-            , success: function( data ) {
-                console.log(data);
-            }
-            , failed: function( one, two, three ) {
-                console.log(one,two,three);
-            }
+            , success: this.success
+            , failed: this.failed
         });
     }
     
@@ -79,22 +70,71 @@ Pronamic_Section.prototype = {
      * Removes a section entirely.
      */
     ,  remove: function() {
+        jQuery.ajax({
+            type: 'POST'
+            , url: ajaxurl
+            , data: {
+                  action: 'pronamic_section_remove'
+                , current_id: this.id
+            }
+            , dataType: 'json'
+            , success: this.success
+            , failed: this.failed
+        });
+    }
+    
+    , setNoticeHolder: function( noticeHolder ) {
+        this.noticeHolder = noticeHolder;
+    }
+    
+    , success: function( data ) {
+        if ( data.ret ) {
+            this.showMessage( data.msg, 'success', this.noticeHolder );
+        } else {
+            this.showMessage( data.msg, 'failed', this.noticeHolder );
+        }
+    }
+    
+    , failed: function( one, two, three ) {
+        console.log(one, two, three);
+    }
+    
+    , showMessage: function( message, type, holderElement ) {
+        var alertElement = jQuery( '<div></div>' );
         
+        alertElement
+                .addClass( 'pronamic_section_notification' )
+                .addClass( 'pronamic_section_notification_' + type );
+        
+        alertElement.html( message );
+        
+        jQuery( holderElement ).html( alertElement );
     }
 };
 
 // Listeners
 jQuery( function( $ ) {
     
+    function buildSection( $el ) {
+        var post_id    = $el.data( 'post-id' ),
+            position   = $el.data( 'position' ),
+            notice_h   = $el.data( 'notice-holder' ),
+            current_id = $el.data( 'current-id' );
+    
+        var section = new Pronamic_Section( post_id, current_id, position );
+        section.setNoticeHolder( notice_h );
+        
+        return section;
+    }
+    
     $( '.jPronamicSectionNewButton' ).click( function( e ) {
         e.preventDefault();
-        
-        var self = $( this ),
-            post_id = self.data( 'post-id' ),
+        console.log('clicked');
+        var self       = $( this ),
             post_title = self.siblings( '.jPronamicSectionNewTitle' ).val();
             
+        var section = buildSection( self );
         
-        var section = new Pronamic_Section( post_id );
         section.add( post_title );
     } );
     
@@ -102,11 +142,8 @@ jQuery( function( $ ) {
         e.preventDefault();
         
         var self       = $( this ),
-            post_id    = self.data( 'post-id' ),
-            position   = self.data( 'position' ),
-            current_id = self.data( 'current-id' );
-        
-        var section = new Pronamic_Section( post_id, current_id, position );
+            section    = buildSection( self );
+            
         section.moveUp();
     } );
     
@@ -114,11 +151,8 @@ jQuery( function( $ ) {
         e.preventDefault();
         
         var self       = $( this ),
-            post_id    = self.data( 'post-id' ),
-            position   = self.data( 'position' ),
-            current_id = self.data( 'current-id' );
-        
-        var section = new Pronamic_Section( post_id, current_id, position );
+            section    = buildSection( self );
+            
         section.moveDown();
     } );
     
@@ -126,11 +160,12 @@ jQuery( function( $ ) {
         e.preventDefault();
         
         var self       = $( this ),
-            post_id    = self.data( 'post-id' ),
-            position   = self.data( 'position' ),
-            current_id = self.data( 'current-id' );
-        
-        var section = new Pronamic_Section( post_id, current_id, position );
-        section.removeSection();
+            section    = buildSection( self );
+            
+        section.remove();
+    } );
+    
+    $( '.jPronamicSectionName' ).click( function( e ) {
+        e.stopPropagation();
     } );
 } );
