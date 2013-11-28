@@ -1,3 +1,14 @@
+/**
+ * A class function that is used to represent a specific
+ * Pronamic_Section displayed.  Allows you to move it up
+ * or down or remove it. Also can add a new Section, if only a post_id
+ * is supplied
+ * 
+ * @param int post_id required
+ * @param int id
+ * @param int position
+ * @returns Pronamic_Section
+ */
 var Pronamic_Section = function( post_id, id, position ) {
     this.post_id  = post_id;
     
@@ -164,11 +175,11 @@ jQuery( function( $ ) {
         section.setNoticeHolder( notice_h );
         
         return section;
-    }
+    };
     
     $( '.jPronamicSectionNewButton' ).click( function( e ) {
         e.preventDefault();
-        console.log('clicked');
+        
         var self       = $( this ),
             post_title = self.siblings( '.jPronamicSectionNewTitle' ).val();
             
