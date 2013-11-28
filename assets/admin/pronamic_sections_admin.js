@@ -33,6 +33,10 @@ Pronamic_Section.prototype = {
         });
     }
     
+    /**
+     * Makes an AJAX request to move the current Section
+     * down a position
+     */
     , moveDown: function() {
         jQuery.ajax({
               context: this
@@ -50,6 +54,14 @@ Pronamic_Section.prototype = {
         });
     }
     
+    /**
+     * Makes an AJAX request to add a new section to this current
+     * post ID.
+     * 
+     * Requires only a title.
+     * 
+     * @param string post_title
+     */
     , add: function( post_title ) {
         jQuery.ajax({
               context: this
@@ -83,23 +95,50 @@ Pronamic_Section.prototype = {
         });
     }
     
+    /**
+     * Pass in an element identifier than can be used as where
+     * the success and failed messages from the AJAX request are sent to.
+     * 
+     * @param string noticeHolder
+     */
     , setNoticeHolder: function( noticeHolder ) {
         this.noticeHolder = noticeHolder;
     }
     
+    /**
+     * Is the callback for the AJAX requests from the other
+     * prototype methods.  Will do nothing is a noticeHolder 
+     * is not set.
+     * 
+     * @param json data
+     */
     , success: function( data ) {
+        if ( ! this.noticeHolder )
+            return;
+        
         if ( data.ret ) {
-            this.showMessage( data.msg, 'success', this.noticeHolder );
+            this.showMessage( data.msg, 'success' );
         } else {
-            this.showMessage( data.msg, 'failed', this.noticeHolder );
+            this.showMessage( data.msg, 'failed' );
         }
     }
     
+    /**
+     * Failed function callback, just used for debugging at the moment
+     */
     , failed: function( one, two, three ) {
         console.log(one, two, three);
     }
     
-    , showMessage: function( message, type, holderElement ) {
+    /**
+     * Shows a message into the defined noticeHolder. Requires a
+     * string message to show as text, and a type, which defines the
+     * style and color of the message box.
+     * 
+     * @param string message
+     * @param string type
+     */
+    , showMessage: function( message, type ) {
         var alertElement = jQuery( '<div></div>' );
         
         alertElement
@@ -108,7 +147,7 @@ Pronamic_Section.prototype = {
         
         alertElement.html( message );
         
-        jQuery( holderElement ).html( alertElement );
+        jQuery( this.noticeHolder ).html( alertElement );
     }
 };
 
