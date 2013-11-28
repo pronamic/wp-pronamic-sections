@@ -9,17 +9,13 @@
  * @param int position
  * @returns Pronamic_Section
  */
-var Pronamic_Section = function( post_id, id, position ) {
+var Pronamic_Section = function( post_id, id ) {
     this.post_id  = post_id;
     
     if ( undefined === id )
         id = null;
     
-    if ( undefined === position )
-        position = null;
-    
     this.id       = id;
-    this.position = position;
 };
 
 Pronamic_Section.prototype = {
@@ -36,7 +32,6 @@ Pronamic_Section.prototype = {
                   action: 'pronamic_section_move_up'
                 , post_id: this.post_id
                 , current_id: this.id
-                , position: this.position
             }
             , dataType: 'json'
             , success: this.success
@@ -57,7 +52,6 @@ Pronamic_Section.prototype = {
                   action: 'pronamic_section_move_down'
                 , post_id: this.post_id
                 , current_id: this.id
-                , position: this.position
             }
             , dataType: 'json'
             , success: this.success
@@ -94,7 +88,8 @@ Pronamic_Section.prototype = {
      */
     ,  remove: function() {
         jQuery.ajax({
-            type: 'POST'
+            context: this
+            , type: 'POST'
             , url: ajaxurl
             , data: {
                   action: 'pronamic_section_remove'
@@ -152,13 +147,17 @@ Pronamic_Section.prototype = {
     , showMessage: function( message, type ) {
         var alertElement = jQuery( '<div></div>' );
         
-        alertElement
-                .addClass( 'pronamic_section_notification' )
-                .addClass( 'pronamic_section_notification_' + type );
+        alertElement.addClass( 'pronamic_section_notification' );
         
-        alertElement.html( message );
+        if ( 'success' === type ) {
+            alertElement.addClass( 'updated' );
+        } else {
+            alertElement.addClass( 'form-invalid' );
+        }
         
-        jQuery( this.noticeHolder ).html( alertElement );
+        alertElement.html( '<p>' + message + '</p>' );
+        
+        jQuery( this.noticeHolder ).append( alertElement );
     }
 };
 
@@ -167,11 +166,10 @@ jQuery( function( $ ) {
     
     function buildSection( $el ) {
         var post_id    = $el.data( 'post-id' ),
-            position   = $el.data( 'position' ),
             notice_h   = $el.data( 'notice-holder' ),
             current_id = $el.data( 'current-id' );
     
-        var section = new Pronamic_Section( post_id, current_id, position );
+        var section = new Pronamic_Section( post_id, current_id );
         section.setNoticeHolder( notice_h );
         
         return section;
@@ -213,6 +211,7 @@ jQuery( function( $ ) {
             section    = buildSection( self );
             
         section.remove();
+        self.closest( '.jPronamicSectionHolder' ).remove();
     } );
     
     $( '.jPronamicSectionName' ).click( function( e ) {

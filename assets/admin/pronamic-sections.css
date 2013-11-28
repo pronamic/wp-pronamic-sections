@@ -4,7 +4,7 @@
 
     .pronamic_section_buttons {
         display: block;
-        padding: 5px 8px;
+        margin-top: 10px;
         
         *zoom: 1;
     }
