@@ -18,36 +18,9 @@
     .pronamic_section_buttons:after {
         clear: both;
     }
-    
-        .pronamic_section_move_up_button,
-        .pronamic_section_move_down_button,
-        .pronamic_section_remove_button {
-            display: block;
-            float: left;
-            padding: 4px 8px;
-            
-            background: #fff;
-            border: 1px solid #eee;
-            cursor: pointer;
-        }
-    
-        .pronamic_section_move_up_button {
-            background: #46b1f5;
-            color: #fff;
-        }
 
-        .pronamic_section_move_down_button {
-            margin-left: 2px;
-            
-            background: #46b1f5;
-            color: #fff;
-        }
-
-        .pronamic_section_remove_button {
-            margin-left: 10px;
-            
-            background: #f54646;
-            color: #fff;
+        .pronamic_section_button_delete {
+            float: right;
         }
         
         
