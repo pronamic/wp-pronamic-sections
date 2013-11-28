@@ -57,6 +57,14 @@ class Pronamic_Sections_Section {
 		$this->order = $this->position;
 	}
 	
+	public function get_title() {
+		return apply_filters( 'the_title', $this->post->post_title );
+	}
+	
+	public function get_content() {
+		return apply_filters( 'the_content', $this->post->post_content );
+	}
+	
 	/**
 	 * Returns the current position of this section
 	 * 
