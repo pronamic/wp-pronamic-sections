@@ -40,7 +40,7 @@ class Pronamic_Sections_Admin {
 	}
 
     public function assets() {
-        wp_register_script( 'pronamic_sections_admin', plugins_url( '/assets/admin/pronamic_sections_admin.js', PRONAMIC_SECTIONS_FILE ), array( 'jquery', 'jquery-ui-sortable' ) );
+        wp_register_script( 'pronamic_sections_admin', plugins_url( '/assets/admin/pronamic_sections_admin.js', PRONAMIC_SECTIONS_FILE ), array( 'jquery' ) );
         wp_enqueue_script( 'pronamic_sections_admin' );
 		
 		wp_register_style( 'pronamic-sections', plugins_url( '/assets/admin/pronamic-sections.css', PRONAMIC_SECTIONS_FILE ) );
