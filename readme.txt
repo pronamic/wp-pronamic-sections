@@ -3,7 +3,7 @@ Contributors: pronamic, zogot
 Tags: sections, tabs, pronamic tabs, pronamic sections, extra wysiwyg
 Requires at least: 3.1
 Tested up to: 3.7.1
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,14 @@ Mail support@pronamic.nl
 [Issues](http://github.com/pronamic/wp-pronamic-sections/issues);
 
 == Changelog ==
+
+= 1.1.1 =
+* Missing Readme notes
+
+= 1.1.0 =
+* REFACTOR: Moved the classes into the WP namespace, now Pronamic/WP/Sections instead of Pronamic/Sections
+* REFACTOR: Changed inc folder to includes
+* REFACTOR: Removed the 'wp-' prefix from the core plugin file
 
 = 1.0 =
 * REFACTOR: Now uses a custom post type.
