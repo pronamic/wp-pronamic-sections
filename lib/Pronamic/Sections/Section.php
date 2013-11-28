@@ -13,6 +13,10 @@ class Pronamic_Sections_Section {
 	
 	private $position;
 	
+	public $title;
+	public $content;
+	public $order;
+	
 	public function __construct( WP_Post $post = null ) {
 		if ( null !== $post )
 			$this->populate( $post );
@@ -46,6 +50,11 @@ class Pronamic_Sections_Section {
 		$this->post = $post;
 	
 		$this->position  = intval( get_post_meta( $this->ID, '_pronamic_section_position', true ) );
+		
+		// Compat support
+		$this->title = $this->post->post_title;
+		$this->content = $this->post->post_content;
+		$this->order = $this->position;
 	}
 	
 	/**
