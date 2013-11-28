@@ -13,12 +13,6 @@
 				<input class="jPronamicSectionName pronamic_section_name" type="text" name="pronamic_sections[<?php echo $section->ID; ?>][post_title]" value="<?php echo $section->post_title; ?>" />
 			</h3>
 			<div class="inside">
-				<?php 
-				
-				// Get the section entity
-				$section_class = new Pronamic_Sections_Section( $section ); 
-				
-				?>
 				<div class="pronamic_section_holder" data-id="<?php echo $section->ID; ?>">
 					<?php 
 					
