@@ -5,7 +5,7 @@
  * 
  * 
  */
-class Pronamic_Sections_Section {
+class Pronamic_WP_Sections_Section {
 	
 	public $ID;
 	
@@ -32,7 +32,7 @@ class Pronamic_Sections_Section {
 	 */
 	public static function get_instance( $id ) {
 		if ( $result = get_post( $id ) )
-			return new Pronamic_Sections_Section( $result );
+			return new Pronamic_WP_Sections_Section( $result );
 		
 		return false;
 	}
@@ -82,7 +82,7 @@ class Pronamic_Sections_Section {
 	 * 
 	 * @access private
 	 * @param numeric $position
-	 * @return \Pronamic_Sections_Section
+	 * @return \Pronamic_WP_Sections_Section
 	 */
 	public function set_position( $position ) {
 		$this->position = $position;
@@ -92,14 +92,14 @@ class Pronamic_Sections_Section {
 	}
 	
 	/**
-	 * Moves this section up, and sets the passed in Pronamic_Sections_Section
+	 * Moves this section up, and sets the passed in Pronamic_WP_Sections_Section
 	 * to that of this sections current number.
 	 * 
 	 * @access public
-	 * @param Pronamic_Sections_Section $above_section
-	 * @return \Pronamic_Sections_Section
+	 * @param Pronamic_WP_Sections_Section $above_section
+	 * @return \Pronamic_WP_Sections_Section
 	 */
-	public function move_up( Pronamic_Sections_Section $above_section ) {
+	public function move_up( Pronamic_WP_Sections_Section $above_section ) {
 		$old_above_position = $above_section->get_position();
 		// Set the position of the one above, to this current position
 		$above_section->set_position( $this->position );
@@ -112,14 +112,14 @@ class Pronamic_Sections_Section {
 	}
 	
 	/**
-	 * Moves this section down, and sets the passed in Pronamic_Sections_Section
+	 * Moves this section down, and sets the passed in Pronamic_WP_Sections_Section
 	 * to that of this sections current number.
 	 * 
 	 * @access public
-	 * @param Pronamic_Sections_Section $below_section
-	 * @return \Pronamic_Sections_Section
+	 * @param Pronamic_WP_Sections_Section $below_section
+	 * @return \Pronamic_WP_Sections_Section
 	 */
-	public function move_down( Pronamic_Sections_Section $below_section ) {
+	public function move_down( Pronamic_WP_Sections_Section $below_section ) {
 		$old_below_position = $below_section->get_position();
 		// Get the section below this one
 		$below_section->set_position( $this->position );

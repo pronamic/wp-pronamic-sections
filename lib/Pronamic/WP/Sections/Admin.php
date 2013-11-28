@@ -1,6 +1,6 @@
 <?php
 
-class Pronamic_Sections_Admin {
+class Pronamic_WP_Sections_Admin {
     public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -58,9 +58,9 @@ class Pronamic_Sections_Admin {
 	
 	public function show_sections( $post ) {
 		// Get all sections
-		$all_sections = Pronamic_Sections_SectionFactory::get_all_sections( $post->ID );
+		$all_sections = Pronamic_WP_Sections_SectionFactory::get_all_sections( $post->ID );
 		
-		$view = new Pronamic_Sections_View( PRONAMIC_SECTIONS_ROOT . '/views' );
+		$view = new Pronamic_WP_Sections_View( PRONAMIC_SECTIONS_ROOT . '/views' );
 		$view
 			->set_view( 'show_sections' )
 			->set( 'sections', $all_sections )
@@ -83,9 +83,9 @@ class Pronamic_Sections_Admin {
 			return;
 		
 		foreach ( $sections as $section_id => $section_post ) {
-			$section = Pronamic_Sections_Section::get_instance( $section_id );
+			$section = Pronamic_WP_Sections_Section::get_instance( $section_id );
 			
-			if ( is_a( $section, 'Pronamic_Sections_Section' ) ) {
+			if ( is_a( $section, 'Pronamic_WP_Sections_Section' ) ) {
 				$is_updated = $section->update( $section_post['post_title'], $section_post['post_content'] );
 			}
 		}
@@ -103,11 +103,11 @@ class Pronamic_Sections_Admin {
 		$post_id    = filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
 		
 		// Get this section
-		$section = Pronamic_Sections_Section::get_instance( $current_id );
+		$section = Pronamic_WP_Sections_Section::get_instance( $current_id );
 		$position = $section->get_position();
 		
 		// Get the section above this one
-		$above_section = Pronamic_Sections_SectionFactory::get_above_section( $post_id, $position );
+		$above_section = Pronamic_WP_Sections_SectionFactory::get_above_section( $post_id, $position );
 		
 		$section->move_up( $above_section );
 		
@@ -126,11 +126,11 @@ class Pronamic_Sections_Admin {
 		$post_id    = filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
 		
 		// Get this section
-		$section = Pronamic_Sections_Section::get_instance( $current_id );
+		$section = Pronamic_WP_Sections_Section::get_instance( $current_id );
 		$position = $section->get_position();
 		
 		// Get the section below this one
-		$below_section = Pronamic_Sections_SectionFactory::get_below_section( $post_id, $position );
+		$below_section = Pronamic_WP_Sections_SectionFactory::get_below_section( $post_id, $position );
 		
 		// Move the section down
 		$section->move_down( $below_section );
@@ -150,7 +150,7 @@ class Pronamic_Sections_Admin {
 		$post_title   = filter_input( INPUT_POST, 'post_title', FILTER_UNSAFE_RAW );
 		
 		// Add the new section
-		Pronamic_Sections_SectionFactory::insert_section( $parent_id, $post_title );
+		Pronamic_WP_Sections_SectionFactory::insert_section( $parent_id, $post_title );
 		
 		wp_send_json( array(
 			'ret' => true,
@@ -164,7 +164,7 @@ class Pronamic_Sections_Admin {
 		
 		$section_id = filter_input( INPUT_POST, 'current_id', FILTER_SANITIZE_NUMBER_INT );
 		
-		$section = Pronamic_Sections_Section::get_instance( $section_id );
+		$section = Pronamic_WP_Sections_Section::get_instance( $section_id );
 		$section->remove();
 		
 		wp_send_json( array(
