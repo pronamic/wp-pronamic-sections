@@ -111,4 +111,28 @@ class Pronamic_Sections_Section {
 		
 		return $this;
 	}
+	
+	/**
+	 * Updates a section with the passed in post title
+	 * and the post content
+	 * @param string $post_title
+	 * @param string $post_content
+	 * @return boolean
+	 */
+	public function update( $post_title, $post_content ) {
+		$result = wp_update_post( array(
+			'ID'           => $this->ID,
+			'post_title'   => $post_title,
+			'post_content' => $post_content
+		) );
+		
+		return ( bool ) ( 0 !== $result );
+	}
+	
+	/**
+	 * Removing this instance of the Section
+	 */
+	public function remove() {
+		wp_trash_post( $this->ID );
+	}
 }
