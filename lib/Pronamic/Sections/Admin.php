@@ -10,10 +10,12 @@ class Pronamic_Sections_Admin {
 		
 		add_action( 'edit_page_form', array( $this, 'show_sections' ) );
 		add_action( 'edit_form_advanced', array( $this, 'show_sections' ) );
+		add_action( 'save_post', array( $this, 'save_sections' ), 10, 2 );
 		
 		add_action( 'wp_ajax_pronamic_section_move_up', array( $this, 'ajax_pronamic_section_move_up' ) );
 		add_action( 'wp_ajax_pronamic_section_move_down', array( $this, 'ajax_pronamic_section_move_down' ) );
 		add_action( 'wp_ajax_pronamic_section_add', array( $this, 'ajax_pronamic_section_add' ) );
+		add_action( 'wp_ajax_pronamic_section_remove', array( $this, 'ajax_pronamic_section_remove' ) );
     }
 	
 	public function init() {
@@ -57,6 +59,34 @@ class Pronamic_Sections_Admin {
 			->set( 'sections', $all_sections )
 			->set( 'post_id', $post->ID )
 			->render();
+	}
+	
+	public function save_sections( $post_id, $post ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+			return;
+		
+		if ( ! filter_has_var( INPUT_POST, 'pronamic_sections' ) )
+			return;
+		
+		remove_action( 'save_post', array( $this, 'save_sections' ), 10, 2 );
+		
+		$sections = $_POST['pronamic_sections'];
+		
+		if ( empty( $sections) )
+			return;
+		
+		foreach ( $sections as $section_id => $section_post ) {
+			$section = Pronamic_Sections_Section::get_instance( $section_id );
+			
+			if ( is_a( $section, 'Pronamic_Sections_Section' ) ) {
+				$is_updated = $section->update( $section_post['post_title'], $section_post['post_content'] );
+			
+				if ( $is_updated )
+					$section->set_position( $section_post['position'] );
+			}
+		}
+		
+		add_action( 'save_post', array( $this, 'save_sections' ), 10, 2 );
 	}
 	
 	public function ajax_pronamic_section_move_up() {
@@ -103,11 +133,26 @@ class Pronamic_Sections_Admin {
 		$post_title   = filter_input( INPUT_POST, 'post_title', FILTER_UNSAFE_RAW );
 		
 		// Add the new section
-		$section = Pronamic_Sections_SectionFactory::insert_section( $parent_id, $post_title );
+		Pronamic_Sections_SectionFactory::insert_section( $parent_id, $post_title );
 		
 		wp_send_json( array(
 			'ret' => true,
 			'msg' => __( 'Successfully added a new section. Update the post to see it!', 'pronamic-sections-domain' )
+		) );
+	}
+	
+	public function ajax_pronamic_section_remove() {
+		if ( ! DOING_AJAX )
+			return;
+		
+		$section_id = filter_input( INPUT_POST, 'current_id', FILTER_SANITIZE_NUMBER_INT );
+		
+		$section = Pronamic_Sections_Section::get_instance( $section_id );
+		$section->remove();
+		
+		wp_send_json( array(
+			'ret' => true,
+			'msg' => __( 'Successful removed the section.', 'pronamic-sections-domain' )
 		) );
 	}
 }
