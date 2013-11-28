@@ -5,7 +5,8 @@
 </div>
 <?php if ( ! empty( $sections ) ) : ?>
 	<?php foreach ( $sections as $section ) : ?>
-		<div class="pronamic_sections_editor_holder postbox">
+		<div class="jPronamicSectionNotice-<?php echo $section->ID; ?>"></div>
+		<div class="jPronamicSectionHolder pronamic_sections_editor_holder postbox closed">
 			<div class="pronamic_sections_handle handlediv" title="<?php _e( 'Click to toggle' ); ?>"><br></div>
 			<h3 class="pronamic_sections_title hndle">
 				<?php _e( 'Section', 'pronamic-sections-domain' ); ?> 
@@ -17,10 +18,8 @@
 				// Get the section entity
 				$section_class = new Pronamic_Sections_Section( $section ); 
 				
-				$position = $section_class->get_position();
-				
 				?>
-				<div class="pronamic_section_holder" data-id="<?php echo $section->ID; ?>" data-position="<?php echo $position; ?>">
+				<div class="pronamic_section_holder" data-id="<?php echo $section->ID; ?>">
 					<?php 
 					
 					wp_editor( $section->post_content, 'pronamic_section_editor_' . $section->ID, array(
@@ -32,10 +31,9 @@
 					?>
 				</div>
 				<div class="pronamic_section_buttons">
-					<input type="hidden" name="pronamic_sections[<?php echo $section->ID; ?>][position]" value="<?php echo $position; ?>"/>
-					<span class="jPronamicSectionExistingMoveUp pronamic_section_move_up_button" data-position="<?php echo $position; ?>" data-post-id="<?php echo $post_id; ?>" data-current-id="<?php echo $section->ID; ?>"><?php _e( 'Up', 'pronamic-sections-domain' ); ?></span>
-					<span class="jPronamicSectionExistingMoveDown pronamic_section_move_down_button" data-position="<?php echo $section_class->get_position(); ?>" data-post-id="<?php echo $post_id; ?>" data-current-id="<?php echo $section->ID; ?>"><?php _e( 'Down', 'pronamic-sections-domain' ); ?></span>
-					<span class="jPronamicSectionExistingRemove pronamic_section_remove_button" data-post-id="<?php echo $post_id; ?>" data-current-id="<?php echo $section->ID; ?>"><?php _e( 'Remove', 'pronamic-sections-domain' ); ?></span>
+					<span class="jPronamicSectionExistingMoveUp button button-primary" data-post-id="<?php echo $post_id; ?>" data-current-id="<?php echo $section->ID; ?>" data-notice-holder=".jPronamicSectionNotice-<?php echo $section->ID; ?>"><?php _e( 'Up', 'pronamic-sections-domain' ); ?></span>
+					<span class="jPronamicSectionExistingMoveDown button button-primary"  data-post-id="<?php echo $post_id; ?>" data-current-id="<?php echo $section->ID; ?>" data-notice-holder=".jPronamicSectionNotice-<?php echo $section->ID; ?>"><?php _e( 'Down', 'pronamic-sections-domain' ); ?></span>
+					<span class="jPronamicSectionExistingRemove button delete pronamic_section_button_delete" data-post-id="<?php echo $post_id; ?>" data-current-id="<?php echo $section->ID; ?>" data-notice-holder=".jPronamicSectionNotice-<?php echo $section->ID; ?>"><?php _e( 'Remove', 'pronamic-sections-domain' ); ?></span>
 				</div>
 			</div>
 		</div>
