@@ -8,7 +8,7 @@
 		<div class="jPronamicSectionNotice-<?php echo $section->ID; ?>"></div>
 		<div class="jPronamicSectionHolder pronamic_sections_editor_holder postbox closed">
 			<div class="pronamic_sections_handle handlediv" title="<?php _e( 'Click to toggle' ); ?>"><br></div>
-			<h3 class="pronamic_sections_title hndle">
+			<h3 class="jPronamicSectionsTitle pronamic_sections_title hndle" data-id="<?php echo $section->ID; ?>">
 				<?php _e( 'Section', 'pronamic-sections-domain' ); ?> 
 				<input class="jPronamicSectionName pronamic_section_name" type="text" name="pronamic_sections[<?php echo $section->ID; ?>][post_title]" value="<?php echo $section->post_title; ?>" />
 			</h3>
