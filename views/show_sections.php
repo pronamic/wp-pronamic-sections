@@ -29,6 +29,9 @@
 					<span class="jPronamicSectionExistingMoveDown button button-primary"  data-post-id="<?php echo $post_id; ?>" data-current-id="<?php echo $section->ID; ?>" data-notice-holder=".jPronamicSectionNotice-<?php echo $section->ID; ?>"><?php _e( 'Down', 'pronamic-sections-domain' ); ?></span>
 					<span class="jPronamicSectionExistingRemove button delete pronamic_section_button_delete" data-post-id="<?php echo $post_id; ?>" data-current-id="<?php echo $section->ID; ?>" data-notice-holder=".jPronamicSectionNotice-<?php echo $section->ID; ?>"><?php _e( 'Remove', 'pronamic-sections-domain' ); ?></span>
 				</div>
+				<div class="pronamic_section_extra">
+					<?php do_action( 'pronamic_section_admin_extra', $section, new Pronamic_WP_Sections_Section( $section ) ); ?>
+				</div>
 			</div>
 		</div>
 	<?php endforeach; ?>

@@ -145,6 +145,8 @@ class Pronamic_WP_Sections_Section {
 			'post_content' => $post_content
 		) );
 		
+		do_action( 'pronamic_section_update', $this );
+		
 		return ( bool ) ( 0 !== $result );
 	}
 	
