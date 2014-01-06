@@ -1,12 +1,22 @@
 <?php
+/*
+Plugin Name: Pronamic Sections
+Plugin URI: http://wp.pronamic.eu/plugins/pronamic-sections/
+Description: Store additional WYSIWYG content for your posts/pages/CPT's that you can use for ANY tab library.
 
-/**
- * Plugin Name: Pronamic Sections
- * Author: Pronamic
- * Author URI: http://pronamic.nl
- * Domain: pronamic-sections-domain
- * Version: 1.1.1
- */
+Version: 1.2.1
+Requires at least: 3.0
+
+Author: Pronamic
+Author URI: http://www.pronamic.eu/
+
+Text Domain: pronamic-sections-domain
+Domain Path: /languages/
+
+License: GPL
+
+GitHub URI: https://github.com/pronamic/wp-pronamic-sections
+*/
 
 define( 'PRONAMIC_SECTIONS_FILE', __FILE__ );
 define( 'PRONAMIC_SECTIONS_ROOT', dirname( __FILE__ ) );
