@@ -37,3 +37,11 @@ if ( is_admin() ) {
 }
 
 include PRONAMIC_SECTIONS_ROOT . '/includes/template-functions.php';
+
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/ShortcodeFactory.php';
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Shortcode/Shortcode.php';
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Shortcode/Foundation.php';
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Shortcode/Bootstrap.php';
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Shortcodes.php';
+
+new Pronamic_WP_Sections_Shortcodes();
