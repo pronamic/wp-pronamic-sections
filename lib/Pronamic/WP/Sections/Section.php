@@ -52,15 +52,73 @@ class Pronamic_WP_Sections_Section {
 		$this->position  = intval( get_post_meta( $this->ID, '_pronamic_section_position', true ) );
 		
 		// Compat support
-		$this->title = $this->post->post_title;
+		$this->title   = $this->post->post_title;
 		$this->content = $this->post->post_content;
-		$this->order = $this->position;
+		$this->order   = $this->position;
 	}
 	
+	/**
+	 * Echo the value of get_title()
+	 * 
+	 * @access public
+	 * @return echo 
+	 */
+	public function the_title() {
+		echo $this->get_title();
+	}
+	
+	/**
+	 * Return the value of the POST title with the the_title filter
+	 * applied
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public function get_title() {
 		return apply_filters( 'the_title', $this->post->post_title );
 	}
 	
+	/**
+	 * Echo the value of get_slug()
+	 * 
+	 * @access public
+	 * @return echo
+	 */
+	public function the_slug() {
+		echo $this->get_slug();
+	}
+	
+	/**
+	 * Return the value of the POST title ran through strtolower and
+	 * sanitize_title ( to remove any unusual characters.
+	 * 
+	 * This is a similar process that slugging a post title goes through
+	 * for WordPress post slugs.
+	 * 
+	 * @access public
+	 * @return string
+	 */
+	public function get_slug() {
+		return strtolower( sanitize_title( $this->post->post_title ) );
+	}
+	
+	/**
+	 * Echo the value of the get_content() method
+	 * 
+	 * @access public
+	 * @return echo
+	 */
+	public function the_content() {
+		echo $this->get_content();
+	}
+	
+	/**
+	 * Return the value of the POST content, ran through the 'the_content'
+	 * filter.
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public function get_content() {
 		return apply_filters( 'the_content', $this->post->post_content );
 	}
