@@ -3,7 +3,7 @@ Contributors: pronamic, zogot
 Tags: sections, tabs, pronamic tabs, pronamic sections, extra wysiwyg
 Requires at least: 3.1
 Tested up to: 3.8.1
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,12 @@ Mail support@pronamic.nl
 [Issues](http://github.com/pronamic/wp-pronamic-sections/issues);
 
 == Changelog ==
+
+= 1.3.0 =
+* Added WordPress SEO ( Yoast ) Support. Sections are now counted in the scoring process.
+
+= 1.2.1 =
+* Fixed the plugins header information
 
 = 1.2.0 =
 * FEATURE: New action called when updating a section: 'pronamic_section_update'. The instance of the Section is passed in.
