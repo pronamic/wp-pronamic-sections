@@ -15,6 +15,9 @@ class Pronamic_WP_Sections_Admin {
 		add_action( 'wp_ajax_pronamic_section_move_down', array( $this, 'ajax_pronamic_section_move_down' ) );
 		add_action( 'wp_ajax_pronamic_section_add', array( $this, 'ajax_pronamic_section_add' ) );
 		add_action( 'wp_ajax_pronamic_section_remove', array( $this, 'ajax_pronamic_section_remove' ) );
+		
+		// Add support for section content in yoast analysis
+		add_filter( 'wpseo_pre_analysis_post_content', array( $this, 'yoast_support' ), 10, 2 );
     }
 	
 	public function init() {
@@ -171,5 +174,20 @@ class Pronamic_WP_Sections_Admin {
 			'ret' => true,
 			'msg' => __( 'Successful removed the section.', 'pronamic-sections-domain' )
 		) );
+	}
+	
+	public function yoast_support( $content, WP_Post $post ) {
+		// Get the Pronamic Sections
+		$pronamic_sections = the_pronamic_sections( $post->ID );
+		
+		$element = apply_filters( 'pronamic_sections_yoast_support_title_element', 'h2' );
+		
+		foreach ( $pronamic_sections as $pronamic_section ) {
+			$content .= "<{$element}>{$pronamic_section->get_title()}</{$element}>";
+			$content .= $pronamic_section->get_content();
+			$content .= '<br/>';
+		}
+		
+		return $content;
 	}
 }
