@@ -68,8 +68,8 @@ class Pronamic_WP_Sections_Section {
 	}
 	
 	/**
-	 * Return the value of the POST title with the the_title filter
-	 * applied
+	 * Returns the post objects post_title ran through the the_title
+	 * filter.
 	 * 
 	 * @access public
 	 * @return string

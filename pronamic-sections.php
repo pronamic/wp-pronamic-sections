@@ -4,7 +4,7 @@ Plugin Name: Pronamic Sections
 Plugin URI: http://wp.pronamic.eu/plugins/pronamic-sections/
 Description: Store additional WYSIWYG content for your posts/pages/CPT's that you can use for ANY tab library.
 
-Version: 1.2.1
+Version: 1.3.0
 Requires at least: 3.0
 
 Author: Pronamic
