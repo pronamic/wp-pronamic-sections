@@ -11,6 +11,7 @@ class Pronamic_WP_Sections_Admin {
 		add_action( 'edit_form_advanced', array( $this, 'show_sections' ) );
 		add_action( 'save_post', array( $this, 'save_sections' ), 10, 2 );
 
+		// AJAX methods to handle the pronamic section calls.
 		add_action( 'wp_ajax_pronamic_section_move_up', array( $this, 'ajax_pronamic_section_move_up' ) );
 		add_action( 'wp_ajax_pronamic_section_move_down', array( $this, 'ajax_pronamic_section_move_down' ) );
 		add_action( 'wp_ajax_pronamic_section_add', array( $this, 'ajax_pronamic_section_add' ) );
@@ -24,8 +25,13 @@ class Pronamic_WP_Sections_Admin {
 		add_action( 'admin_init', array( $this, 'example_data' ) );
 	}
 
+	/**
+	 * Check if it requires an upgrade from the pre 1.0 versions.
+	 * 
+	 * @access public
+	 * @return void
+	 */
 	public function admin_init() {
-
 		$db_version = get_option( 'pronamic_sections_version' );
 
 		if ( empty( $db_version ) )
@@ -38,6 +44,14 @@ class Pronamic_WP_Sections_Admin {
 
 		wp_register_style( 'pronamic-sections', plugins_url( '/assets/admin/pronamic-sections.css', PRONAMIC_SECTIONS_FILE ) );
 		wp_enqueue_style( 'pronamic-sections' );
+		
+		if ( filter_has_var( INPUT_GET, 'group' ) ) {
+			$group = filter_input( INPUT_GET, 'group', FILTER_SANITIZE_STRING );
+			if ( 'pronamic-sections-examples' === $group ) {
+				wp_enqueue_style( 'pronamic-sections-bootstrap-tabs' );
+				wp_enqueue_script( 'pronamic-sections-bootstrap-tabs' );
+			}
+		}
 	}
 
 	public function show_sections( $post ) {
