@@ -56,3 +56,17 @@
     background: #fff;
     border-radius: 5px;
 }
+
+.pronamic_section_clearfix:before,
+.pronamic_section_clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.pronamic_section_clearfix:after {
+    clear: both;
+}
+
+.pronamic_section_clearfix {
+    *zoom: 1;
+}
