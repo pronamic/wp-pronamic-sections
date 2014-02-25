@@ -57,10 +57,35 @@ class Pronamic_WP_Sections_Section {
 		$this->order = $this->position;
 	}
 	
+	/**
+	 * Returns the post objects post_title ran through the the_title
+	 * filter.
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public function get_title() {
 		return apply_filters( 'the_title', $this->post->post_title );
 	}
 	
+	/**
+	 * Returns the post objects post_name. The post_name is just a slugified
+	 * post_title.
+	 * 
+	 * @access public
+	 * @return string
+	 */
+	public function get_slug() {
+		return $this->post->post_name;
+	}
+	
+	/**
+	 * Returns the post_content of the section ran through the_content
+	 * filter.
+	 * 
+	 * @access public
+	 * @return string
+	 */
 	public function get_content() {
 		return apply_filters( 'the_content', $this->post->post_content );
 	}
