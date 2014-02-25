@@ -22,7 +22,30 @@ class Pronamic_WP_Sections_Settings {
 			)
 		);
 		
-		register_setting( 'pronamic_sections_settings_general', 'pronamic-sections-post-types' );
+		register_setting( 'pronamic-sections-general', 'pronamic-sections-post-types' );
+		
+		/**
+		 * Look Settings
+		 */
+		add_settings_section(
+			'pronamic-sections-look',
+			__( 'Look and Feel', 'pronamic-sections-domain' ),
+			'__return_false',
+			'pronamic-sections'
+		);
+		
+		add_settings_field(
+			'pronamic-sections-look-activate-shortcode',
+			__( 'Activate Shortcode?', 'pronamic-sections-domain' ),
+			array( $this, 'field_checkbox' ),
+			'pronamic-sections',
+			'pronamic-sections-look',
+			array(
+				'label_for' => 'pronamic-sections-look-activate-shortcode'
+			)
+		);
+		
+		register_setting( 'pronamic-sections-look', 'pronamic-sections-look-activate-shortcode' );
 	}
 	
 	public function field_post_type_checkboxes( $args ) {
@@ -58,6 +81,20 @@ class Pronamic_WP_Sections_Settings {
 				ucwords( str_replace( array( '_', '-' ), ' ', $post_type ) )
 			);
 		}
+	}
+	
+	public function field_checkbox( $args ) {
+		if ( isset( $args['description'] ) ) {
+			echo "<span class='howto'>" . $args['description'] . "</span><hr/>";
+		}
+		
+		$value = get_option( $args['label_for'], 0 );
+		
+		printf(
+			'<input type="checkbox" id="%1$s" name="%1$s" value="1" %2$s />',
+			$args['label_for'],
+			checked( $value, 1, false )
+		);
 	}
 	
 }
