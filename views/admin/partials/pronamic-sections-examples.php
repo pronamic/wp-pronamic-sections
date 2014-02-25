@@ -4,6 +4,9 @@
 	<span class="howto"><?php _e( 'Install the example data to see the usages of Bootstrap, Foundation and others. All example data is removable afterwards.', 'pronamic-sections-domain' ); ?></span>
 <?php else: ?>
 	<h3>Bootstrap</h3>
+	<div class="form-invalid">
+		<strong><?php _e( 'You MUST be using Twitter Bootstrap in your theme for it to show correctly', 'pronamic-sections-domain' ); ?></strong>
+	</div>
 	<p><?php printf( __( 'Twitter Bootstrap uses different class names to change the style. If you want to use one of the other examples then change the markup to match <a target="_blank" href="%s">theirs</a>', 'pronamic-sections-domain' ), 'http://getbootstrap.com/components/#nav' ); ?></p>
 	<div class="pronamic-section-example-group-holder pronamic_section_clearfix">
 		<div class="pronamic-section-example-group-code">
