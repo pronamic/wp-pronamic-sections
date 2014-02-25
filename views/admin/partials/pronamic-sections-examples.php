@@ -4,30 +4,29 @@
 	<span class="howto"><?php _e( 'Install the example data to see the usages of Bootstrap, Foundation and others. All example data is removable afterwards.', 'pronamic-sections-domain' ); ?></span>
 <?php else: ?>
 	<h3>Bootstrap</h3>
-	<h4>Horizontal Tabs</h4>
+	<p><?php printf( __( 'Twitter Bootstrap uses different class names to change the style. If you want to use one of the other examples then change the markup to match <a target="_blank" href="%s">theirs</a>', 'pronamic-sections-domain' ), 'http://getbootstrap.com/components/#nav' ); ?></p>
 	<div class="pronamic-section-example-group-holder pronamic_section_clearfix">
 		<div class="pronamic-section-example-group-code">
-			<textarea style="width:100%;min-height:300px;white-space:pre;word-wrap: normal;overflow-x: scroll;">
-&lt;?php if ( function_exists( 'the_pronamic_sections' ) ) : ?&gt;
-	&lt;?php $sections = the_pronamic_sections( get_the_ID() ); ?&gt;
-	&lt;?php if ( ! empty( $sections ) ) : ?&gt;
-		&lt;ul class=&quot;nav nav-tabs pronamic_section_clearfix&quot;&gt;
-			&lt;?php foreach ( $sections as $section ) : ?&gt;
-			&lt;li &lt;?php if ( 1 == $section-&gt;get_position() ) : ?&gt; class=&quot;active&quot;&lt;?php endif; ?&gt;&gt;
-				&lt;a data-toggle=&quot;tab&quot; href=&quot;#&lt;?php echo sanitize_title( $section-&gt;get_title() ); ?&gt;&quot;&gt;&lt;?php echo $section-&gt;get_title(); ?&gt;&lt;/a&gt;
-			&lt;/li&gt;
-			&lt;?php endforeach; ?&gt;
-		&lt;/ul&gt;
-		&lt;div class=&quot;tab-content pronamic_section_clearfix&quot;&gt;
-			&lt;?php foreach ( $sections as $section ) : ?&gt;
-				&lt;div id=&quot;&lt;?php echo sanitize_title( $section-&gt;get_title() ); ?&gt;&quot; class=&quot;tab-pane &lt;?php if ( 1 == $section-&gt;get_position() ) : ?&gt;active&lt;?php endif; ?&gt;&quot;&gt;
-					&lt;?php echo $section-&gt;get_content(); ?&gt;
-				&lt;/div&gt;
-			&lt;?php endforeach; ?&gt;
-		&lt;/div&gt;
-	&lt;?php endif; ?&gt;
-&lt;?php endif; ?&gt;
-			</textarea>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">if</span> ( <span style="color: #00aaaa">function_exists</span>( <span style="color: #aa5500">&#39;the_pronamic_sections&#39;</span> ) ) : <span style="color: #4c8317">?&gt;</span>
+    <span style="color: #4c8317">&lt;?php</span> <span style="color: #aa0000">$sections</span> = the_pronamic_sections( <span style="color: #aa0000">$example_post_id</span> ); <span style="color: #4c8317">?&gt;</span>
+    <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">if</span> ( ! <span style="color: #0000aa">empty</span>( <span style="color: #aa0000">$sections</span> ) ) : <span style="color: #4c8317">?&gt;</span>
+        &lt;ul class=&quot;nav nav-tabs pronamic_section_clearfix&quot;&gt;
+            <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">foreach</span> ( <span style="color: #aa0000">$sections</span> <span style="color: #0000aa">as</span> <span style="color: #aa0000">$section</span> ) : <span style="color: #4c8317">?&gt;</span>
+            &lt;li <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">if</span> ( <span style="color: #009999">1</span> == <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_position</span>() ) : <span style="color: #4c8317">?&gt;</span> class=&quot;active&quot;<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endif</span>; <span style="color: #4c8317">?&gt;</span>&gt;
+                &lt;a data-toggle=&quot;tab&quot; href=&quot;#<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> sanitize_title( <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_title</span>() ); <span style="color: #4c8317">?&gt;</span>&quot;&gt;<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_title</span>(); <span style="color: #4c8317">?&gt;</span>&lt;/a&gt;
+            &lt;/li&gt;
+            <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endforeach</span>; <span style="color: #4c8317">?&gt;</span>
+        &lt;/ul&gt;
+        &lt;div class=&quot;tab-content pronamic_section_clearfix&quot;&gt;
+            <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">foreach</span> ( <span style="color: #aa0000">$sections</span> <span style="color: #0000aa">as</span> <span style="color: #aa0000">$section</span> ) : <span style="color: #4c8317">?&gt;</span>
+                &lt;div id=&quot;<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> sanitize_title( <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_title</span>() ); <span style="color: #4c8317">?&gt;</span>&quot; class=&quot;tab-pane <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">if</span> ( <span style="color: #009999">1</span> == <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_position</span>() ) : <span style="color: #4c8317">?&gt;</span>active<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endif</span>; <span style="color: #4c8317">?&gt;</span>&quot;&gt;
+                    <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_content</span>(); <span style="color: #4c8317">?&gt;</span>
+                &lt;/div&gt;
+            <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endforeach</span>; <span style="color: #4c8317">?&gt;</span>
+        &lt;/div&gt;
+    <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endif</span>; <span style="color: #4c8317">?&gt;</span>
+<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endif</span>; <span style="color: #4c8317">?&gt;</span>
+</pre></div>
 		</div>
 		<div class="pronamic-section-example-group-preview">
 			<h5><?php _e( 'Preview', 'pronamic-sections-domain' ); ?></h5>
@@ -52,8 +51,6 @@
 			<?php endif; ?>
 		</div>
 	</div>
-	<h4>Vertical Tabs</h4>
-
 	<hr/>
 	<h3>Foundation</h3>
 	<hr/>
