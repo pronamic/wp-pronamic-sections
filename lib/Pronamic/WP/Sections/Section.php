@@ -61,6 +61,17 @@ class Pronamic_WP_Sections_Section {
 		return apply_filters( 'the_title', $this->post->post_title );
 	}
 	
+	/**
+	 * Returns the post objects post_name. The post_name is just a slugified
+	 * post_title.
+	 * 
+	 * @access public
+	 * @return string
+	 */
+	public function get_slug() {
+		return $this->post->post_name;
+	}
+	
 	public function get_content() {
 		return apply_filters( 'the_content', $this->post->post_content );
 	}
