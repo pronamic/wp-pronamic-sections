@@ -245,7 +245,7 @@ class Pronamic_WP_Sections_Admin {
 		wp_redirect( add_query_arg( array(
 			'page' => 'pronamic_sections',
 			'group' => 'pronamic-sections-examples'
-		), admin_url() ) );
+		), admin_url( 'admin.php' ) ) );
 		exit;
 	}
 	
