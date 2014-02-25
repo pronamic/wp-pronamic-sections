@@ -70,3 +70,24 @@
 .pronamic_section_clearfix {
     *zoom: 1;
 }
+
+/**
+ * ================
+ *  Admin Examples
+ * ================
+ */
+
+.pronamic-section-example-group-code {
+    float: left;
+    width: 50%;
+}
+
+    .pronamic-section-example-group-code textarea {
+        font-size: 12px;
+    }
+    
+.pronamic-section-example-group-preview {
+    float: left;
+    width: 45%;
+    margin-left: 3%;
+}
