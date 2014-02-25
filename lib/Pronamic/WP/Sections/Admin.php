@@ -3,7 +3,6 @@
 class Pronamic_WP_Sections_Admin {
 
 	public function __construct() {
-		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
@@ -23,29 +22,6 @@ class Pronamic_WP_Sections_Admin {
 		// Add the admin menu
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'example_data' ) );
-	}
-
-	public function init() {
-		load_plugin_textdomain( 'pronamic-sections-domain', false, dirname( plugin_basename( PRONAMIC_SECTIONS_FILE ) ) );
-
-		// Register the new internal post type
-		register_post_type( 'pronamic_section', array(
-			'labels' => array(
-				'name' => _x( 'Sections', 'Plural Name for Pronamic Section Post', 'pronamic-sections-domain' ),
-				'singular_name' => _x( 'Section', 'Singular Name for the Pronamic Section Post', 'pronamic-sections-domain' )
-			),
-			'public' => false,
-			'publicly_querable' => false,
-			'show_ui' => false,
-			'show_in_menu' => false,
-			'query_var' => false,
-			'rewrite' => null,
-			'capability_type' => 'post',
-			'has_archive' => false,
-			'hierarchical' => false,
-			'menu_position' => null,
-			'supports' => array( 'title', 'editor' )
-		) );
 	}
 
 	public function admin_init() {
