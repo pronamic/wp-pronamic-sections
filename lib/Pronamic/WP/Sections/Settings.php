@@ -45,6 +45,18 @@ class Pronamic_WP_Sections_Settings {
 			)
 		);
 		
+		add_settings_field(
+			'pronamic-sections-look-shortcode-template',
+			__( 'Shortcode Template', 'pronamic-sections-domain' ),
+			array( $this, 'field_select' ),
+			'pronamic-sections',
+			'pronamic-sections-look',
+			array(
+				'label_for' => 'pronamic-sections-look-shortcode-template',
+				'description' => sprintf( __( 'Specify a template to use for the output of the shortcodes. You can define your own also. See <a target="_blank" href="%s">here</a>', 'pronamic-sections-domain' ), '' )
+			)
+		);
+		
 		register_setting( 'pronamic-sections-look', 'pronamic-sections-look-activate-shortcode' );
 	}
 	
@@ -95,6 +107,14 @@ class Pronamic_WP_Sections_Settings {
 			$args['label_for'],
 			checked( $value, 1, false )
 		);
+	}
+	
+	public function field_select( $args ) {
+		if ( isset( $args['description'] ) ) {
+			echo "<span class='howto'>" . $args['description'] . "</span><hr/>";
+		}
+		
+		
 	}
 	
 }
