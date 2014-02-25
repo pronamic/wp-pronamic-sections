@@ -19,6 +19,10 @@ class Pronamic_WP_Sections_Admin {
 
 		// Add support for section content in yoast analysis
 		add_filter( 'wpseo_pre_analysis_post_content', array( $this, 'yoast_support' ), 10, 2 );
+		
+		// Add the admin menu
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_init', array( $this, 'example_data' ) );
 	}
 
 	public function init() {
@@ -190,6 +194,127 @@ class Pronamic_WP_Sections_Admin {
 		}
 
 		return $content;
+	}
+	
+	public function admin_menu() {
+		// Admin Menu
+		add_menu_page(
+			__( 'Pronamic Sections', 'pronamic-sections-domain' ),
+			__( 'Sections', 'pronamic-sections-domain' ),
+			'manage_options',
+			'pronamic_sections',
+			array( $this, 'view_pronamic_sections_page' ),
+			'dashicons-list-view'
+		);
+	}
+	
+	public function view_pronamic_sections_page() {
+		$section = 'pronamic-sections-general';
+		
+		if ( filter_has_var( INPUT_GET, 'group' ) ) {
+			$section = filter_input( INPUT_GET, 'group', FILTER_SANITIZE_STRING );
+		}
+		
+		include plugin_dir_path( PRONAMIC_SECTIONS_FILE ) . 'views/admin/view_pronamic_sections_page.php';
+	}
+	
+	public function example_data() {
+		if ( ! filter_has_var( INPUT_GET, 'example-data' ) ) {
+			return;
+		}
+		
+		// Determine what they user pressed.
+		$intent = filter_input( INPUT_GET, 'example-data', FILTER_SANITIZE_STRING );
+		
+		// Intents you can run
+		$valid_intents = array(
+			'install',
+			'uninstall',
+		);
+		
+		// Ensure the intent is valid
+		if ( ! in_array( $intent, $valid_intents ) ) {
+			return;
+		}
+		
+		// Call the intents method
+		call_user_func( array( $this, $intent . '_example_data' ) );
+		
+		// Redirect so a refresh doesn't recall it.
+		wp_redirect( add_query_arg( array(
+			'page' => 'pronamic_sections',
+			'group' => 'pronamic-sections-examples'
+		), admin_url() ) );
+		exit;
+	}
+	
+	public function install_example_data() {
+		// get a possible existing id
+		$existing_post_id = get_option( 'pronamic_sections_example_post_id' );
+		
+		// remove old data first
+		if ( ! empty( $existing_post_id ) )
+			$this->uninstall_example_data();
+		
+		// Make a new parent page
+		$example_post_id = wp_insert_post( array( 
+			'post_title' => __( 'Pronamic Sections Example', 'pronamic-sections-domain' ),
+			'post_type' => 'pronamic_section_example',
+			'post_status' => 'inherit'
+		) );
+		
+		// add the sections
+		$section_one = wp_insert_post( array(
+			'post_title' => __( 'Section 1', 'pronamic-sections-domain' ),
+			'post_content' => __( 'Example content for the first pronamic section', 'pronamic-sections-domain' ),
+			'post_type' => 'pronamic_section',
+			'post_parent' => $example_post_id,
+			'post_status' => 'publish'
+		) );
+		
+		add_post_meta( $section_one, '_pronamic_section_position', 1 );
+		
+		$section_two = wp_insert_post( array(
+			'post_title' => __( 'Section 2', 'pronamic-sections-domain' ),
+			'post_content' => __( 'Example content for the second pronamic section', 'pronamic-sections-domain' ),
+			'post_type' => 'pronamic_section',
+			'post_parent' => $example_post_id,
+			'post_status' => 'publish'
+		) );
+		
+		add_post_meta( $section_two, '_pronamic_section_position', 2 );
+		
+		$section_three = wp_insert_post( array(
+			'post_title' => __( 'Section 3', 'pronamic-sections-domain' ),
+			'post_content' => __( 'Example content for the third pronamic section', 'pronamic-sections-domain' ),
+			'post_type' => 'pronamic_section',
+			'post_parent' => $example_post_id,
+			'post_status' => 'publish'
+		) );
+		
+		add_post_meta( $section_three, '_pronamic_section_position', 3 );
+		
+		update_option( 'pronamic_sections_example_post_id', $example_post_id );
+	}
+	
+	public function uninstall_example_data() {
+		// check an existing example id has been set
+		$example_post_id = get_option( 'pronamic_sections_example_post_id' );
+		
+		if ( ! empty( $example_post_id ) ) {
+			
+			// get all sections
+			$sections = the_pronamic_sections( $example_post_id );
+			
+			// remove
+			foreach ( $sections as $section ) {
+				wp_delete_post( $section->ID );
+			}
+
+			// remove the parent page and remove the option
+			wp_delete_post( $example_post_id );
+			delete_option( 'pronamic_sections_example_post_id' );
+		}
 	}
 
 }
