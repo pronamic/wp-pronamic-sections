@@ -218,6 +218,17 @@ class Pronamic_WP_Sections_Admin {
 		include plugin_dir_path( PRONAMIC_SECTIONS_FILE ) . 'views/admin/view_pronamic_sections_page.php';
 	}
 	
+	/**
+	 * Handles the request to do something with the example data.  Allows
+	 * the two values of install and uninstall and then redirects back to
+	 * the sections example page.
+	 * 
+	 * @todo Requires better validation check to ensure no-one can just call
+	 * this from the admin area. Cap check.
+	 * 
+	 * @access public
+	 * @return void
+	 */
 	public function example_data() {
 		if ( ! filter_has_var( INPUT_GET, 'example-data' ) ) {
 			return;
@@ -248,13 +259,20 @@ class Pronamic_WP_Sections_Admin {
 		exit;
 	}
 	
+	/**
+	 * Creates the post and its sections for the example data.
+	 * 
+	 * @access public
+	 * @return void
+	 */
 	public function install_example_data() {
 		// get a possible existing id
 		$existing_post_id = get_option( 'pronamic_sections_example_post_id' );
 		
 		// remove old data first
-		if ( ! empty( $existing_post_id ) )
+		if ( ! empty( $existing_post_id ) ) {
 			$this->uninstall_example_data();
+		}
 		
 		// Make a new parent page
 		$example_post_id = wp_insert_post( array( 
@@ -263,40 +281,30 @@ class Pronamic_WP_Sections_Admin {
 			'post_status' => 'inherit'
 		) );
 		
-		// add the sections
-		$section_one = wp_insert_post( array(
-			'post_title' => __( 'Section 1', 'pronamic-sections-domain' ),
-			'post_content' => __( 'Example content for the first pronamic section', 'pronamic-sections-domain' ),
-			'post_type' => 'pronamic_section',
-			'post_parent' => $example_post_id,
-			'post_status' => 'publish'
-		) );
-		
-		add_post_meta( $section_one, '_pronamic_section_position', 1 );
-		
-		$section_two = wp_insert_post( array(
-			'post_title' => __( 'Section 2', 'pronamic-sections-domain' ),
-			'post_content' => __( 'Example content for the second pronamic section', 'pronamic-sections-domain' ),
-			'post_type' => 'pronamic_section',
-			'post_parent' => $example_post_id,
-			'post_status' => 'publish'
-		) );
-		
-		add_post_meta( $section_two, '_pronamic_section_position', 2 );
-		
-		$section_three = wp_insert_post( array(
-			'post_title' => __( 'Section 3', 'pronamic-sections-domain' ),
-			'post_content' => __( 'Example content for the third pronamic section', 'pronamic-sections-domain' ),
-			'post_type' => 'pronamic_section',
-			'post_parent' => $example_post_id,
-			'post_status' => 'publish'
-		) );
-		
-		add_post_meta( $section_three, '_pronamic_section_position', 3 );
-		
+		// Add the saved option for the example id
 		update_option( 'pronamic_sections_example_post_id', $example_post_id );
+		
+		// Make 3 sections
+		for ( $i = 0; $i <= 3; $i++ ) {
+			$section_id = wp_insert_post( array(
+				'post_title' => sprintf( __( 'Section %d', 'pronamic-sections-domain' ), $i ),
+				'post_content' => sprintf( __( 'Example content for Section %d', 'pronamic-sections-domain' ), $i ),
+				'post_type' => 'pronamic_section',
+				'post_parent' => $example_post_id,
+				'post_status' => 'publish'
+			) );
+			
+			// Set the sections position
+			add_post_meta( $section_id, '_pronamic_section_position', $i );
+		}
 	}
 	
+	/**
+	 * Removes the example data and deleted the saved example_post_id option.
+	 * 
+	 * @access public
+	 * @reeturn void
+	 */
 	public function uninstall_example_data() {
 		// check an existing example id has been set
 		$example_post_id = get_option( 'pronamic_sections_example_post_id' );
