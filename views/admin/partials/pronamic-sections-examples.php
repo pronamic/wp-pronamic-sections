@@ -15,14 +15,14 @@
     <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">if</span> ( ! <span style="color: #0000aa">empty</span>( <span style="color: #aa0000">$sections</span> ) ) : <span style="color: #4c8317">?&gt;</span>
         &lt;ul class=&quot;nav nav-tabs pronamic_section_clearfix&quot;&gt;
             <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">foreach</span> ( <span style="color: #aa0000">$sections</span> <span style="color: #0000aa">as</span> <span style="color: #aa0000">$section</span> ) : <span style="color: #4c8317">?&gt;</span>
-            &lt;li <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">if</span> ( <span style="color: #009999">1</span> == <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_position</span>() ) : <span style="color: #4c8317">?&gt;</span> class=&quot;active&quot;<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endif</span>; <span style="color: #4c8317">?&gt;</span>&gt;
-                &lt;a data-toggle=&quot;tab&quot; href=&quot;#<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> sanitize_title( <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_title</span>() ); <span style="color: #4c8317">?&gt;</span>&quot;&gt;<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_title</span>(); <span style="color: #4c8317">?&gt;</span>&lt;/a&gt;
+            &lt;li <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">if</span> ( <span style="color: #009999">0</span> == <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_position</span>() ) : <span style="color: #4c8317">?&gt;</span> class=&quot;active&quot;<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endif</span>; <span style="color: #4c8317">?&gt;</span>&gt;
+                &lt;a data-toggle=&quot;tab&quot; href=&quot;#<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_slug</span>(); <span style="color: #4c8317">?&gt;</span>&quot;&gt;<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_title</span>(); <span style="color: #4c8317">?&gt;</span>&lt;/a&gt;
             &lt;/li&gt;
             <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endforeach</span>; <span style="color: #4c8317">?&gt;</span>
         &lt;/ul&gt;
         &lt;div class=&quot;tab-content pronamic_section_clearfix&quot;&gt;
             <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">foreach</span> ( <span style="color: #aa0000">$sections</span> <span style="color: #0000aa">as</span> <span style="color: #aa0000">$section</span> ) : <span style="color: #4c8317">?&gt;</span>
-                &lt;div id=&quot;<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> sanitize_title( <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_title</span>() ); <span style="color: #4c8317">?&gt;</span>&quot; class=&quot;tab-pane <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">if</span> ( <span style="color: #009999">1</span> == <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_position</span>() ) : <span style="color: #4c8317">?&gt;</span>active<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endif</span>; <span style="color: #4c8317">?&gt;</span>&quot;&gt;
+                &lt;div id=&quot;<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_slug</span>(); <span style="color: #4c8317">?&gt;</span>&quot; class=&quot;tab-pane <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">if</span> ( <span style="color: #009999">0</span> == <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_position</span>() ) : <span style="color: #4c8317">?&gt;</span>active<span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endif</span>; <span style="color: #4c8317">?&gt;</span>&quot;&gt;
                     <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">echo</span> <span style="color: #aa0000">$section</span>-&gt;<span style="color: #1e90ff">get_content</span>(); <span style="color: #4c8317">?&gt;</span>
                 &lt;/div&gt;
             <span style="color: #4c8317">&lt;?php</span> <span style="color: #0000aa">endforeach</span>; <span style="color: #4c8317">?&gt;</span>
@@ -38,14 +38,14 @@
 				<?php if ( ! empty( $sections ) ) : ?>
 					<ul class="nav nav-tabs pronamic_section_clearfix">
 						<?php foreach ( $sections as $section ) : ?>
-						<li <?php if ( 1 == $section->get_position() ) : ?> class="active"<?php endif; ?>>
-							<a data-toggle="tab" href="#<?php echo sanitize_title( $section->get_title() ); ?>"><?php echo $section->get_title(); ?></a>
+						<li <?php if ( 0 == $section->get_position() ) : ?> class="active"<?php endif; ?>>
+							<a data-toggle="tab" href="#<?php echo $section->get_slug(); ?>"><?php echo $section->get_title(); ?></a>
 						</li>
 						<?php endforeach; ?>
 					</ul>
 					<div class="tab-content pronamic_section_clearfix">
 						<?php foreach ( $sections as $section ) : ?>
-							<div id="<?php echo sanitize_title( $section->get_title() ); ?>" class="tab-pane <?php if ( 1 == $section->get_position() ) : ?>active<?php endif; ?>">
+							<div id="<?php echo $section->get_slug(); ?>" class="tab-pane <?php if ( 0 == $section->get_position() ) : ?>active<?php endif; ?>">
 								<?php echo $section->get_content(); ?>
 							</div>
 						<?php endforeach; ?>
