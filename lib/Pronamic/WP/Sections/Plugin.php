@@ -42,6 +42,9 @@ class Pronamic_WP_Sections_Plugin {
 		// Bootstrap
 		wp_register_script( 'pronamic-sections-bootstrap-tabs', plugins_url( 'assets/parts/bootstrap/bootstrap-tabs.js', PRONAMIC_SECTIONS_FILE ) );
 		wp_register_style( 'pronamic-sections-bootstrap-tabs', plugins_url( 'assets/parts/bootstrap/bootstrap-tabs.css', PRONAMIC_SECTIONS_FILE ) );
+		
+		// Register the default managers
+		Pronamic_WP_Sections_DisplayManager::register( 'Pronamic_WP_Sections_Display_Bootstrap' );
 	}
 	
 	/**

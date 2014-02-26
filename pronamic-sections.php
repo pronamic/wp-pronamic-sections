@@ -25,6 +25,9 @@ define( 'PRONAMIC_SECTIONS_FOLDER', basename( PRONAMIC_SECTIONS_ROOT ) );
 // Required classes
 include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Section.php';
 include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/SectionFactory.php';
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Display/Display.php';
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Display/Bootstrap.php';
+include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/DisplayManager.php';
 include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Plugin.php';
 
 global $pronamic_sections_plugin;

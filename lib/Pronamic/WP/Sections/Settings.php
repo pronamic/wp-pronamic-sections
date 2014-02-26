@@ -46,18 +46,19 @@ class Pronamic_WP_Sections_Settings {
 		);
 		
 		add_settings_field(
-			'pronamic-sections-look-shortcode-template',
+			'pronamic-sections-look-shortcode-display',
 			__( 'Shortcode Template', 'pronamic-sections-domain' ),
-			array( $this, 'field_select' ),
+			array( $this, 'field_display_select' ),
 			'pronamic-sections',
 			'pronamic-sections-look',
 			array(
-				'label_for' => 'pronamic-sections-look-shortcode-template',
-				'description' => sprintf( __( 'Specify a template to use for the output of the shortcodes. You can define your own also. See <a target="_blank" href="%s">here</a>', 'pronamic-sections-domain' ), '' )
+				'label_for' => 'pronamic-sections-look-shortcode-display',
+				'description' => sprintf( __( 'Specify a display output of the shortcode.. You can define your own also. See <a target="_blank" href="%s">here</a>', 'pronamic-sections-domain' ), '' )
 			)
 		);
 		
 		register_setting( 'pronamic-sections-look', 'pronamic-sections-look-activate-shortcode' );
+		register_setting( 'pronamic-sections-look', 'pronamic-sections-look-shortcode-display' );
 	}
 	
 	public function field_post_type_checkboxes( $args ) {
@@ -109,12 +110,21 @@ class Pronamic_WP_Sections_Settings {
 		);
 	}
 	
-	public function field_select( $args ) {
+	public function field_display_select( $args ) {
 		if ( isset( $args['description'] ) ) {
 			echo "<span class='howto'>" . $args['description'] . "</span><hr/>";
 		}
 		
+		// Get all registered display methods
+		$registered_displays = Pronamic_WP_Sections_DisplayManager::all();
 		
+		$print_format = "<option value='%s'>%s</option>";
+		
+		echo "<select name='{$args['label_for']}'>";
+		foreach ( $registered_displays as $registered_display ) {
+			printf( $print_format, $registered_display->get_ID(), $registered_display->get_name() );
+		}
+		echo "</select>";
 	}
 	
 }

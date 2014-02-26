@@ -55,8 +55,6 @@
 		</div>
 	</div>
 	<hr/>
-	<h3>Foundation</h3>
-	<hr/>
 	<p><a class="button button-primary" href="<?php echo add_query_arg( array( 'example-data' => 'uninstall' ), admin_url( 'admin.php' ) ); ?>"><?php _e( 'Uninstall Example Data', 'pronamic-sections-domain' ); ?></a></p>
 	<span class="howto"><?php _e( 'This will remove the post and its sections used in the above examples', 'pronamic-sections-domain' ); ?></span>
 <?php endif; ?>
