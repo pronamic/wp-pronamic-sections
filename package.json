@@ -1,0 +1,36 @@
+{
+  "name": "pronamic-sections",
+  "version": "1.3.0",
+  "description": "Store additional WYSIWYG content for your posts/pages/CPT's that you can use for ANY tab library.",
+  "main": "pronamic-sections.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pronamic/wp-pronamic-sections"
+  },
+  "keywords": [
+    "pronamic",
+    "sections",
+    "wordpress",
+    "wp",
+    "wysiwyg"
+  ],
+  "author": "Pronamic",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/pronamic/wp-pronamic-sections/issues"
+  },
+  "homepage": "https://github.com/pronamic/wp-pronamic-sections",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-checkwpversion": "~0.3.0",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-phpcs": "^0.2.2",
+    "grunt-phplint": "0.0.5",
+    "grunt-phpunit": "~0.3.3",
+    "grunt-wp-i18n": "~0.4.0"
+  }
+}
