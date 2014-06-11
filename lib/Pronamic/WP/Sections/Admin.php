@@ -61,10 +61,10 @@ class Pronamic_WP_Sections_Admin {
 
 		$view = new Pronamic_WP_Sections_View( PRONAMIC_SECTIONS_ROOT . '/views' );
 		$view
-				->set_view( 'show_sections' )
-				->set( 'sections', $all_sections )
-				->set( 'post_id', $post->ID )
-				->render();
+			->set_view( 'show_sections' )
+			->set( 'sections', $all_sections )
+			->set( 'post_id', $post->ID )
+			->render();
 	}
 
 	public function save_sections( $post_id, $post ) {
