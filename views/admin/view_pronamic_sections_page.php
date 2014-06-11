@@ -5,12 +5,12 @@
 		<a href="<?php echo add_query_arg( array( 'group' => 'pronamic-sections-look' ) ); ?>" class="nav-tab <?php if ( 'pronamic-sections-look' === $section ) : ?>nav-tab-active<?php endif; ?>"><i class="dashicons dashicons-art"></i> <?php _e( 'Look and feel', 'pronamic-sections-domain' ); ?></a>
 		<a href="<?php echo add_query_arg( array( 'group' => 'pronamic-sections-examples' ) ); ?>" class="nav-tab <?php if ( 'pronamic-sections-examples' === $section ) : ?>nav-tab-active<?php endif; ?>"><i class="dashicons dashicons-screenoptions"></i> <?php _e( 'Examples', 'pronamic-sections-domain' ); ?></a>
 	</h2>
-	
+
 	<!-- Settings Form -->
 	<form action="options.php" method="POST">
 		<?php if ( 'pronamic-sections-examples' === $section ) : ?>
 			<?php include 'partials/pronamic-sections-examples.php'; ?>
-		<?php else: ?>
+		<?php else : ?>
 			<?php settings_fields( $section ); ?>
 			<table class="form-table">
 				<?php do_settings_fields( 'pronamic-sections', $section ); ?>

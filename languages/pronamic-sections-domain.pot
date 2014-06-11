@@ -1,0 +1,183 @@
+# Copyright (C) 2014 Pronamic
+# This file is distributed under the GPL.
+msgid ""
+msgstr ""
+"Project-Id-Version: Pronamic Sections 1.3.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/pronamic-sections\n"
+"POT-Creation-Date: 2014-06-11 07:37:18+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 0.4.5\n"
+
+#: lib/Pronamic/WP/Sections/Admin.php:119
+msgid "Successfully moved the %s section up. Refresh to see the changes"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:144
+msgid "Successfully moved the %s section down. Refresh to see the changes"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:162
+msgid "Successfully added a new section: %s. Update the post to see it!"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:178
+msgid "Successful removed the section."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Pronamic Sections"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:201
+msgid "Sections"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:277
+msgid "Pronamic Sections Example"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:288
+msgid "Section %d"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:289
+msgid "Example content for Section %d"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:10
+msgid "General Settings"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:14
+msgid "Post Types"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:20
+msgid ""
+"Choose the post types you want to show the Pronamic Sections boxes on in "
+"the Admin area"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:31
+msgid "Look and Feel"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:38
+msgid "Activate Shortcode?"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:49
+msgid "Shortcode Template"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:55
+msgid ""
+"Specify a template to use for the output of the shortcodes. You can define "
+"your own also. See <a target=\"_blank\" href=\"%s\">here</a>"
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:9
+msgid "Install Example Data"
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:13
+msgid ""
+"Install the example data to see the usages of Bootstrap, Foundation and "
+"others. All example data is removable afterwards."
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:21
+msgid "You MUST be using Twitter Bootstrap in your theme for it to show correctly"
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:24
+msgid ""
+"Twitter Bootstrap uses different class names to change the style. If you "
+"want to use one of the other examples then change the markup to match <a "
+"target=\"_blank\" href=\"%s\">theirs</a>"
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:49
+msgid "Preview"
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:74
+msgid "Uninstall Example Data"
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:75
+msgid "This will remove the post and its sections used in the above examples"
+msgstr ""
+
+#: views/admin/view_pronamic_sections_page.php:4
+msgid "General"
+msgstr ""
+
+#: views/admin/view_pronamic_sections_page.php:5
+msgid "Look and feel"
+msgstr ""
+
+#: views/admin/view_pronamic_sections_page.php:6
+msgid "Examples"
+msgstr ""
+
+#: views/admin/view_pronamic_sections_page.php:18
+msgid "Save settings"
+msgstr ""
+
+#: views/show_sections.php:4
+msgid "Add Section"
+msgstr ""
+
+#: views/show_sections.php:10
+msgid "Click to toggle"
+msgstr ""
+
+#: views/show_sections.php:12
+msgid "Section"
+msgstr ""
+
+#: views/show_sections.php:28
+msgid "Up"
+msgstr ""
+
+#: views/show_sections.php:29
+msgid "Down"
+msgstr ""
+
+#: views/show_sections.php:30
+msgid "Remove"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.happywp.com/plugins/pronamic-sections/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Store additional WYSIWYG content for your posts/pages/CPT's that you can "
+"use for ANY tab library."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Pronamic"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.pronamic.eu/"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Plugin.php:26
+msgctxt "Plural Name for Pronamic Section Post"
+msgid "Sections"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Plugin.php:27
+msgctxt "Singular Name for the Pronamic Section Post"
+msgid "Section"
+msgstr ""

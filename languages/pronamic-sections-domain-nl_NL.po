@@ -2,48 +2,212 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pronamic\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-24 10:04+0100\n"
-"PO-Revision-Date: 2013-05-24 10:04+0100\n"
-"Last-Translator: K.Tolsma <kareljan@pronamic.nl>\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/pronamic-sections\n"
+"POT-Creation-Date: 2014-06-11 07:37:18+00:00\n"
+"PO-Revision-Date: 2014-06-11 09:38+0100\n"
+"Last-Translator: Remco Tolsma <info@remcotolsma.nl>\n"
 "Language-Team: Pronamic <info@pronamic.nl>\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/0.1\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;__ngettext:1,2;__withdesc;_ewithdesc;_c;_n_noop:1,2;__ngettext_noop:1,2;_x:2c,1;_nc:1,2;esc_attr_e;esc_html_e;esc_attr__;_nx:4c,1,2;_nx_noop:4c,1,2;esc_html_x:2c,1;esc_html__;_ex:2c,1\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;__ngettext:1,2;__withdesc;_ewithdesc;_c;"
+"_n_noop:1,2;__ngettext_noop:1,2;_x:2c,1;_nc:1,2;esc_attr_e;esc_html_e;"
+"esc_attr__;_nx:4c,1,2;_nx_noop:4c,1,2;esc_html_x:2c,1;esc_html__;_ex:2c,1\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: lib/Pronamic/Sections/Admin.php:32
+#: lib/Pronamic/WP/Sections/Admin.php:119
+msgid "Successfully moved the %s section up. Refresh to see the changes"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:144
+msgid "Successfully moved the %s section down. Refresh to see the changes"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:162
+msgid "Successfully added a new section: %s. Update the post to see it!"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Admin.php:178
+#, fuzzy
+msgid "Successful removed the section."
+msgstr "Rubriek:"
+
+#. Plugin Name of the plugin/theme
 msgid "Pronamic Sections"
 msgstr "Pronamic Section"
 
-#: views/view_section_meta_box.php:13
-msgid "Section Title"
-msgstr "Sectie titel"
+#: lib/Pronamic/WP/Sections/Admin.php:201
+msgid "Sections"
+msgstr "Secties"
 
-#: views/view_section_meta_box.php:20
-msgid "Delete"
+#: lib/Pronamic/WP/Sections/Admin.php:277
+msgid "Pronamic Sections Example"
+msgstr "Pronamic Secties voorbeeld"
+
+#: lib/Pronamic/WP/Sections/Admin.php:288
+msgid "Section %d"
+msgstr "Sectie %d"
+
+#: lib/Pronamic/WP/Sections/Admin.php:289
+msgid "Example content for Section %d"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:10
+msgid "General Settings"
+msgstr "Algemene instellingen"
+
+#: lib/Pronamic/WP/Sections/Settings.php:14
+msgid "Post Types"
+msgstr "Bericht typen"
+
+#: lib/Pronamic/WP/Sections/Settings.php:20
+msgid ""
+"Choose the post types you want to show the Pronamic Sections boxes on in the "
+"Admin area"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:31
+msgid "Look and Feel"
+msgstr ""
+
+#: lib/Pronamic/WP/Sections/Settings.php:38
+#, fuzzy
+msgid "Activate Shortcode?"
+msgstr "Activeer"
+
+#: lib/Pronamic/WP/Sections/Settings.php:49
+#, fuzzy
+msgid "Shortcode Template"
+msgstr "Shortcode"
+
+#: lib/Pronamic/WP/Sections/Settings.php:55
+msgid ""
+"Specify a template to use for the output of the shortcodes. You can define "
+"your own also. See <a target=\"_blank\" href=\"%s\">here</a>"
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:9
+#, fuzzy
+msgid "Install Example Data"
+msgstr "Installeer"
+
+#: views/admin/partials/pronamic-sections-examples.php:13
+msgid ""
+"Install the example data to see the usages of Bootstrap, Foundation and "
+"others. All example data is removable afterwards."
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:21
+msgid ""
+"You MUST be using Twitter Bootstrap in your theme for it to show correctly"
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:24
+msgid ""
+"Twitter Bootstrap uses different class names to change the style. If you "
+"want to use one of the other examples then change the markup to match <a "
+"target=\"_blank\" href=\"%s\">theirs</a>"
+msgstr ""
+
+#: views/admin/partials/pronamic-sections-examples.php:49
+msgid "Preview"
+msgstr "Preview"
+
+#: views/admin/partials/pronamic-sections-examples.php:74
+#, fuzzy
+msgid "Uninstall Example Data"
+msgstr "Buckaroo data:"
+
+#: views/admin/partials/pronamic-sections-examples.php:75
+msgid "This will remove the post and its sections used in the above examples"
+msgstr ""
+
+#: views/admin/view_pronamic_sections_page.php:4
+msgid "General"
+msgstr "Algemeen"
+
+#: views/admin/view_pronamic_sections_page.php:5
+msgid "Look and feel"
+msgstr ""
+
+#: views/admin/view_pronamic_sections_page.php:6
+msgid "Examples"
+msgstr "Voorbeelden"
+
+#: views/admin/view_pronamic_sections_page.php:18
+#, fuzzy
+msgid "Save settings"
+msgstr "Opslaan"
+
+#: views/show_sections.php:4
+msgid "Add Section"
+msgstr "Sectie toevoegen"
+
+#: views/show_sections.php:10
+#, fuzzy
+msgid "Click to toggle"
+msgstr "Klik om te wisselen"
+
+#: views/show_sections.php:12
+msgid "Section"
+msgstr "Sectie"
+
+#: views/show_sections.php:28
+msgid "Up"
+msgstr "Omhoog"
+
+#: views/show_sections.php:29
+msgid "Down"
+msgstr "Omlaag"
+
+#: views/show_sections.php:30
+msgid "Remove"
 msgstr "Verwijder"
 
-#: views/view_section_meta_box.php:26
-msgid "Add new section"
-msgstr "Nieuwe sectie toevoegen"
+#. Plugin URI of the plugin/theme
+msgid "http://www.happywp.com/plugins/pronamic-sections/"
+msgstr "http://www.happywp.com/plugins/pronamic-sections/"
+
+#. Description of the plugin/theme
+msgid ""
+"Store additional WYSIWYG content for your posts/pages/CPT's that you can use "
+"for ANY tab library."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Pronamic"
+msgstr "Pronamic"
+
+#. Author URI of the plugin/theme
+msgid "http://www.pronamic.eu/"
+msgstr "http://www.pronamic.nl/"
+
+#: lib/Pronamic/WP/Sections/Plugin.php:26
+msgctxt "Plural Name for Pronamic Section Post"
+msgid "Sections"
+msgstr "Secties"
+
+#: lib/Pronamic/WP/Sections/Plugin.php:27
+msgctxt "Singular Name for the Pronamic Section Post"
+msgid "Section"
+msgstr "Sectie"
+
+#~ msgid "Delete"
+#~ msgstr "Verwijder"
 
 #~ msgctxt "post type plural"
-
 #~ msgid "Lessons"
 #~ msgstr "Lessen"
-#~ msgctxt "post type singular"
 
+#~ msgctxt "post type singular"
 #~ msgid "Lesson"
 #~ msgstr "Les"
-#~ msgctxt "lesson"
 
+#~ msgctxt "lesson"
 #~ msgid "Add New"
 #~ msgstr "Nieuwe toevoegen"
 
@@ -139,7 +303,6 @@ msgstr "Nieuwe sectie toevoegen"
 #~ "reacties te bekijken."
 
 #~ msgid "One thought"
-
 #~ msgid_plural "%1$s thoughts"
 #~ msgstr[0] "1 reactie"
 #~ msgstr[1] "%1$s reacties"
@@ -167,15 +330,15 @@ msgstr "Nieuwe sectie toevoegen"
 
 #~ msgid "Monthly Archives: %s"
 #~ msgstr "Maandelijks archief: %s"
-#~ msgctxt "monthly archives date format"
 
+#~ msgctxt "monthly archives date format"
 #~ msgid "F Y"
 #~ msgstr "F Y"
 
 #~ msgid "Yearly Archives: %s"
 #~ msgstr "Jaarlijks archief: %s"
-#~ msgctxt "yearly archives date format"
 
+#~ msgctxt "yearly archives date format"
 #~ msgid "Y"
 #~ msgstr "Y"
 
@@ -204,8 +367,8 @@ msgstr "Nieuwe sectie toevoegen"
 #~ "This entry was posted in %1$s and tagged %2$s by <a href=\"%6$s\">%5$s</"
 #~ "a>."
 #~ msgstr ""
-#~ "Dit bericht was geplaatst in %1$s en getagged %2$s door <a href=\"%6$s\">%"
-#~ "5$s</a>."
+#~ "Dit bericht was geplaatst in %1$s en getagged %2$s door <a href=\"%6$s\">"
+#~ "%5$s</a>."
 
 #~ msgid "This entry was posted in %1$s by <a href=\"%6$s\">%5$s</a>."
 #~ msgstr "Dit bericht is geplaatst in %1$s by <a href=\"%6$s\">%5$s</a>."
@@ -338,10 +501,10 @@ msgstr "Nieuwe sectie toevoegen"
 #~ "rel=\"author\">%7$s</a></span></span>"
 #~ msgstr ""
 #~ "<span class=\"sep\">Geplaatst op </span><a href=\"%1$s\" title=\"%2$s\" "
-#~ "rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\" pubdate>%4"
-#~ "$s</time></a><span class=\"by-author\"> <span class=\"sep\"> door </span> "
-#~ "<span class=\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%"
-#~ "6$s\" rel=\"author\">%7$s</a></span></span>"
+#~ "rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%3$s\" pubdate>"
+#~ "%4$s</time></a><span class=\"by-author\"> <span class=\"sep\"> door </"
+#~ "span> <span class=\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" "
+#~ "title=\"%6$s\" rel=\"author\">%7$s</a></span></span>"
 
 #~ msgid "View all posts by %s"
 #~ msgstr "Bekijk alle berichten van %s"
@@ -350,7 +513,6 @@ msgstr "Nieuwe sectie toevoegen"
 #~ msgstr "Company form id"
 
 #~ msgid "One thought on &ldquo;%2$s&rdquo;"
-
 #~ msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 #~ msgstr[0] "1 reactie op &ldquo;%2$s&rdquo;"
 #~ msgstr[1] "%1$s reacties op &ldquo;%2$s&rdquo;"
@@ -387,9 +549,6 @@ msgstr "Nieuwe sectie toevoegen"
 #~ msgid "Sidebar Widget"
 #~ msgstr "Sidebar widget"
 
-#~ msgid "pronamic"
-#~ msgstr "pronamic"
-
 #~ msgid "Forms"
 #~ msgstr "Formulieren"
 
@@ -420,12 +579,12 @@ msgstr "Nieuwe sectie toevoegen"
 
 #~ msgid "Skip to secondary content"
 #~ msgstr "Spring naar de secundaire inhoud"
-#~ msgctxt "comments number"
 
+#~ msgctxt "comments number"
 #~ msgid "1"
 #~ msgstr "1"
-#~ msgctxt "comments number"
 
+#~ msgctxt "comments number"
 #~ msgid "%"
 #~ msgstr "%"
 
@@ -489,15 +648,15 @@ msgstr "Nieuwe sectie toevoegen"
 #~ msgstr "Afbeelding"
 
 #~ msgid ""
-#~ "<a href=\"%1$s\" rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%2"
-#~ "$s\" pubdate>%3$s</time></a><span class=\"by-author\"> <span class=\"sep"
-#~ "\"> by </span> <span class=\"author vcard\"><a class=\"url fn n\" href=\"%"
-#~ "4$s\" title=\"%5$s\" rel=\"author\">%6$s</a></span></span>"
+#~ "<a href=\"%1$s\" rel=\"bookmark\"><time class=\"entry-date\" datetime="
+#~ "\"%2$s\" pubdate>%3$s</time></a><span class=\"by-author\"> <span class="
+#~ "\"sep\"> by </span> <span class=\"author vcard\"><a class=\"url fn n\" "
+#~ "href=\"%4$s\" title=\"%5$s\" rel=\"author\">%6$s</a></span></span>"
 #~ msgstr ""
-#~ "<a href=\"%1$s\" rel=\"bookmark\"><time class=\"entry-date\" datetime=\"%2"
-#~ "$s\" pubdate>%3$s</time></a><span class=\"by-author\"> <span class=\"sep"
-#~ "\"> door </span> <span class=\"author vcard\"><a class=\"url fn n\" href="
-#~ "\"%4$s\" title=\"%5$s\" rel=\"author\">%6$s</a></span></span>"
+#~ "<a href=\"%1$s\" rel=\"bookmark\"><time class=\"entry-date\" datetime="
+#~ "\"%2$s\" pubdate>%3$s</time></a><span class=\"by-author\"> <span class="
+#~ "\"sep\"> door </span> <span class=\"author vcard\"><a class=\"url fn n\" "
+#~ "href=\"%4$s\" title=\"%5$s\" rel=\"author\">%6$s</a></span></span>"
 
 #~ msgid "Meta"
 #~ msgstr "Meta"
@@ -506,7 +665,6 @@ msgstr "Nieuwe sectie toevoegen"
 #~ msgstr "Galerij"
 
 #~ msgid "This gallery contains <a %1$s>%2$s photo</a>."
-
 #~ msgid_plural "This gallery contains <a %1$s>%2$s photos</a>."
 #~ msgstr[0] "Deze galerij bevat <a %1$s>%2$s foto</a>."
 #~ msgstr[1] "Deze galerij bevat <a %1$s>%2$s foto&#39;s</a>."
@@ -644,9 +802,6 @@ msgstr "Nieuwe sectie toevoegen"
 #~ msgstr ""
 #~ "<a href=\"http://nl.forums.wordpress.org\" target=\"_blank\">Nederlandse "
 #~ "support forums</a> "
-
-#~ msgid "Overview"
-#~ msgstr "Overzicht"
 
 #~ msgid "Light"
 #~ msgstr "Licht"

@@ -19,7 +19,7 @@ class Pronamic_WP_Sections_Admin {
 
 		// Add support for section content in yoast analysis
 		add_filter( 'wpseo_pre_analysis_post_content', array( $this, 'yoast_support' ), 10, 2 );
-		
+
 		// Add the admin menu
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'example_data' ) );
@@ -27,15 +27,16 @@ class Pronamic_WP_Sections_Admin {
 
 	/**
 	 * Check if it requires an upgrade from the pre 1.0 versions.
-	 * 
+	 *
 	 * @access public
 	 * @return void
 	 */
 	public function admin_init() {
 		$db_version = get_option( 'pronamic_sections_version' );
 
-		if ( empty( $db_version ) )
+		if ( empty( $db_version ) ) {
 			include_once PRONAMIC_SECTIONS_ROOT . '/includes/admin/upgrade.php';
+		}
 	}
 
 	public function assets() {
@@ -44,7 +45,7 @@ class Pronamic_WP_Sections_Admin {
 
 		wp_register_style( 'pronamic-sections', plugins_url( '/assets/admin/pronamic-sections.css', PRONAMIC_SECTIONS_FILE ) );
 		wp_enqueue_style( 'pronamic-sections' );
-		
+
 		if ( filter_has_var( INPUT_GET, 'group' ) ) {
 			$group = filter_input( INPUT_GET, 'group', FILTER_SANITIZE_STRING );
 			if ( 'pronamic-sections-examples' === $group ) {
@@ -67,18 +68,21 @@ class Pronamic_WP_Sections_Admin {
 	}
 
 	public function save_sections( $post_id, $post ) {
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
+		}
 
-		if ( !filter_has_var( INPUT_POST, 'pronamic_sections' ) )
+		if ( ! filter_has_var( INPUT_POST, 'pronamic_sections' ) ) {
 			return;
+		}
 
 		remove_action( 'save_post', array( $this, 'save_sections' ), 10, 2 );
 
 		$sections = $_POST['pronamic_sections'];
 
-		if ( empty( $sections ) )
+		if ( empty( $sections ) ) {
 			return;
+		}
 
 		foreach ( $sections as $section_id => $section_post ) {
 			$section = Pronamic_WP_Sections_Section::get_instance( $section_id );
@@ -93,8 +97,9 @@ class Pronamic_WP_Sections_Admin {
 
 	public function ajax_pronamic_section_move_up() {
 		// Determine it is an ajax request
-		if ( !DOING_AJAX )
+		if ( ! DOING_AJAX ) {
 			return;
+		}
 
 		// Get the required post information
 		$current_id = filter_input( INPUT_POST, 'current_id', FILTER_SANITIZE_NUMBER_INT );
@@ -116,8 +121,9 @@ class Pronamic_WP_Sections_Admin {
 	}
 
 	public function ajax_pronamic_section_move_down() {
-		if ( !DOING_AJAX )
+		if ( ! DOING_AJAX ) {
 			return;
+		}
 
 		// Get the required post information
 		$current_id = filter_input( INPUT_POST, 'current_id', FILTER_SANITIZE_NUMBER_INT );
@@ -140,8 +146,9 @@ class Pronamic_WP_Sections_Admin {
 	}
 
 	public function ajax_pronamic_section_add() {
-		if ( !DOING_AJAX )
+		if ( ! DOING_AJAX ) {
 			return;
+		}
 
 		// Get the required post information
 		$parent_id = filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
@@ -157,8 +164,9 @@ class Pronamic_WP_Sections_Admin {
 	}
 
 	public function ajax_pronamic_section_remove() {
-		if ( !DOING_AJAX )
+		if ( ! DOING_AJAX ) {
 			return;
+		}
 
 		$section_id = filter_input( INPUT_POST, 'current_id', FILTER_SANITIZE_NUMBER_INT );
 
@@ -185,7 +193,7 @@ class Pronamic_WP_Sections_Admin {
 
 		return $content;
 	}
-	
+
 	public function admin_menu() {
 		// Admin Menu
 		add_menu_page(
@@ -197,25 +205,25 @@ class Pronamic_WP_Sections_Admin {
 			'dashicons-list-view'
 		);
 	}
-	
+
 	public function view_pronamic_sections_page() {
 		$section = 'pronamic-sections-general';
-		
+
 		if ( filter_has_var( INPUT_GET, 'group' ) ) {
 			$section = filter_input( INPUT_GET, 'group', FILTER_SANITIZE_STRING );
 		}
-		
+
 		include plugin_dir_path( PRONAMIC_SECTIONS_FILE ) . 'views/admin/view_pronamic_sections_page.php';
 	}
-	
+
 	/**
 	 * Handles the request to do something with the example data.  Allows
 	 * the two values of install and uninstall and then redirects back to
 	 * the sections example page.
-	 * 
+	 *
 	 * @todo Requires better validation check to ensure no-one can just call
 	 * this from the admin area. Cap check.
-	 * 
+	 *
 	 * @access public
 	 * @return void
 	 */
@@ -223,87 +231,87 @@ class Pronamic_WP_Sections_Admin {
 		if ( ! filter_has_var( INPUT_GET, 'example-data' ) ) {
 			return;
 		}
-		
+
 		// Determine what they user pressed.
 		$intent = filter_input( INPUT_GET, 'example-data', FILTER_SANITIZE_STRING );
-		
+
 		// Intents you can run
 		$valid_intents = array(
 			'install',
 			'uninstall',
 		);
-		
+
 		// Ensure the intent is valid
 		if ( ! in_array( $intent, $valid_intents ) ) {
 			return;
 		}
-		
+
 		// Call the intents method
 		call_user_func( array( $this, $intent . '_example_data' ) );
-		
+
 		// Redirect so a refresh doesn't recall it.
 		wp_redirect( add_query_arg( array(
-			'page' => 'pronamic_sections',
-			'group' => 'pronamic-sections-examples'
+			'page'  => 'pronamic_sections',
+			'group' => 'pronamic-sections-examples',
 		), admin_url( 'admin.php' ) ) );
 		exit;
 	}
-	
+
 	/**
 	 * Creates the post and its sections for the example data.
-	 * 
+	 *
 	 * @access public
 	 * @return void
 	 */
 	public function install_example_data() {
 		// get a possible existing id
 		$existing_post_id = get_option( 'pronamic_sections_example_post_id' );
-		
+
 		// remove old data first
 		if ( ! empty( $existing_post_id ) ) {
 			$this->uninstall_example_data();
 		}
-		
+
 		// Make a new parent page
-		$example_post_id = wp_insert_post( array( 
-			'post_title' => __( 'Pronamic Sections Example', 'pronamic-sections-domain' ),
-			'post_type' => 'pronamic_section_example',
-			'post_status' => 'inherit'
+		$example_post_id = wp_insert_post( array(
+			'post_title'  => __( 'Pronamic Sections Example', 'pronamic-sections-domain' ),
+			'post_type'   => 'pronamic_section_example',
+			'post_status' => 'inherit',
 		) );
-		
+
 		// Add the saved option for the example id
 		update_option( 'pronamic_sections_example_post_id', $example_post_id );
-		
+
 		// Make 3 sections
 		for ( $i = 0; $i <= 3; $i++ ) {
 			$section_id = wp_insert_post( array(
-				'post_title' => sprintf( __( 'Section %d', 'pronamic-sections-domain' ), $i ),
+				'post_title'   => sprintf( __( 'Section %d', 'pronamic-sections-domain' ), $i ),
 				'post_content' => sprintf( __( 'Example content for Section %d', 'pronamic-sections-domain' ), $i ),
-				'post_type' => 'pronamic_section',
-				'post_parent' => $example_post_id,
-				'post_status' => 'publish'
+				'post_type'    => 'pronamic_section',
+				'post_parent'  => $example_post_id,
+				'post_status'  => 'publish',
 			) );
-			
+
 			// Set the sections position
 			add_post_meta( $section_id, '_pronamic_section_position', $i );
 		}
 	}
-	
+
 	/**
 	 * Removes the example data and deleted the saved example_post_id option.
-	 * 
+	 *
 	 * @access public
 	 * @reeturn void
 	 */
 	public function uninstall_example_data() {
 		// check an existing example id has been set
 		$example_post_id = get_option( 'pronamic_sections_example_post_id' );
-		
+
 		if ( ! empty( $example_post_id ) ) {
-			
+
 			// get all sections
 			$sections = the_pronamic_sections( $example_post_id );
-			
+
 			// remove
 			foreach ( $sections as $section ) {
 				wp_delete_post( $section->ID );

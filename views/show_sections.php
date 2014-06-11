@@ -9,19 +9,19 @@
 		<div class="jPronamicSectionHolder pronamic_sections_editor_holder postbox closed">
 			<div class="pronamic_sections_handle handlediv" title="<?php _e( 'Click to toggle' ); ?>"><br></div>
 			<h3 class="jPronamicSectionsTitle pronamic_sections_title hndle" data-id="<?php echo $section->ID; ?>">
-				<?php _e( 'Section', 'pronamic-sections-domain' ); ?> 
+				<?php _e( 'Section', 'pronamic-sections-domain' ); ?>
 				<input class="jPronamicSectionName pronamic_section_name" type="text" name="pronamic_sections[<?php echo $section->ID; ?>][post_title]" value="<?php echo $section->post_title; ?>" />
 			</h3>
 			<div class="inside">
 				<div class="pronamic_section_holder" data-id="<?php echo $section->ID; ?>">
-					<?php 
-					
+					<?php
+
 					wp_editor( $section->post_content, 'pronamic_section_editor_' . $section->ID, array(
 						'textarea_name' => "pronamic_sections[{$section->ID}][post_content]",
 						'editor_class'  => 'pronamic_section_editor',
-						'editor_height' => '100'
-					) ); 
-					
+						'editor_height' => '100',
+					) );
+
 					?>
 				</div>
 				<div class="pronamic_section_buttons">
