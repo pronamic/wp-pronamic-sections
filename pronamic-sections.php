@@ -28,17 +28,19 @@ include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/SectionFactory.php';
 include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Plugin.php';
 
 global $pronamic_sections_plugin;
+
 $pronamic_sections_plugin = new Pronamic_WP_Sections_Plugin();
 
 // Load the admin!
 if ( is_admin() ) {
-
 	include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Admin.php';
 	include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/View.php';
 	include PRONAMIC_SECTIONS_ROOT . '/lib/Pronamic/WP/Sections/Settings.php';
 
 	global $pronamic_sections_admin;
+
 	$pronamic_sections_admin = new Pronamic_WP_Sections_Admin();
+
 	new Pronamic_WP_Sections_Settings();
 }
 
