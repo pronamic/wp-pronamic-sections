@@ -42,6 +42,10 @@ class Pronamic_WP_Sections_Plugin {
 		// Bootstrap
 		wp_register_script( 'pronamic-sections-bootstrap-tabs', plugins_url( 'assets/parts/bootstrap/bootstrap-tabs.js', PRONAMIC_SECTIONS_FILE ) );
 		wp_register_style( 'pronamic-sections-bootstrap-tabs', plugins_url( 'assets/parts/bootstrap/bootstrap-tabs.css', PRONAMIC_SECTIONS_FILE ) );
+
+		// Filter main search query to search in sections and return parent posts
+		add_filter( 'posts_join', array( $this, 'posts_search_query_join' ) );
+		add_filter( 'posts_where', array( $this, 'posts_search_query_where' ) );
 	}
 
 	/**
@@ -53,5 +57,48 @@ class Pronamic_WP_Sections_Plugin {
 	 */
 	public function assets() {
 		// Check if they want to load the assets
+	}
+
+	/**
+	 * Filter JOIN of search query
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function posts_search_query_join( $join ) {
+		global $wpdb;
+
+		if( is_search() ) {
+			$search_term = get_query_var( 's' , '' );
+
+			if( !empty( $search_term ) ) {
+				$join .= "RIGHT JOIN ".$wpdb->prefix."posts AS wp_sections_posts ON ".$wpdb->prefix."posts.id = wp_sections_posts.post_parent";
+			}
+		}
+
+		return $join;
+	}
+
+	/**
+	 * Filter WHERE conditions of search query
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function posts_search_query_where( $where ) {
+		global $wpdb;
+
+		if( is_search() ) {
+			$search_term = get_query_var( 's' , '' );
+
+			if( !empty( $search_term ) ) {
+				$where .= "OR ( wp_sections_posts.post_type = 'pronamic_section'
+						AND wp_sections_posts.post_status = 'publish'
+						AND wp_sections_posts.post_content LIKE '%".$search_term."%' )
+						GROUP BY ".$wpdb->prefix."posts.id";
+			}
+		}
+
+		return $where;
 	}
 }
