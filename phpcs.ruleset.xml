@@ -7,7 +7,6 @@
 
 		<exclude name="WordPress.XSS.EscapeOutput" />
 
-		<exclude name="WordPress.WhiteSpace.ScopeIndent" />
 		<exclude name="WordPress.Files.FileName" />
 
 		<exclude name="WordPress.VIP.DirectDatabaseQuery" />		
