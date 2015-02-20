@@ -68,11 +68,11 @@ class Pronamic_WP_Sections_Plugin {
 	public function posts_search_query_join( $join ) {
 		global $wpdb;
 
-		if( is_search() ) {
+		if ( is_search() ) {
 			$search_term = get_query_var( 's' , '' );
 
-			if( !empty( $search_term ) ) {
-				$join .= "RIGHT JOIN ".$wpdb->prefix."posts AS wp_sections_posts ON ".$wpdb->prefix."posts.id = wp_sections_posts.post_parent";
+			if ( ! empty( $search_term ) ) {
+				$join .= "RIGHT JOIN {$wpdb->prefix}posts AS wp_sections_posts ON {$wpdb->prefix}posts.id = wp_sections_posts.post_parent";
 			}
 		}
 
@@ -88,14 +88,14 @@ class Pronamic_WP_Sections_Plugin {
 	public function posts_search_query_where( $where ) {
 		global $wpdb;
 
-		if( is_search() ) {
+		if ( is_search() ) {
 			$search_term = get_query_var( 's' , '' );
 
-			if( !empty( $search_term ) ) {
+			if ( ! empty( $search_term ) ) {
 				$where .= "OR ( wp_sections_posts.post_type = 'pronamic_section'
 						AND wp_sections_posts.post_status = 'publish'
-						AND wp_sections_posts.post_content LIKE '%".$search_term."%' )
-						GROUP BY ".$wpdb->prefix."posts.id";
+						AND wp_sections_posts.post_content LIKE '%{$search_term}%' )
+						GROUP BY {$wpdb->prefix}posts.id";
 			}
 		}
 

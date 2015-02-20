@@ -173,7 +173,7 @@ class Pronamic_WP_Sections_Section {
 
 		do_action( 'pronamic_section_update', $this );
 
-		return ( bool ) ( 0 !== $result );
+		return (bool) ( 0 !== $result );
 	}
 
 	/**
