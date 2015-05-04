@@ -69,7 +69,7 @@ class Pronamic_WP_Sections_Plugin {
 		global $wpdb;
 
 		if ( is_admin() || ! is_main_query() ) {
-			return;
+			return $join;
 		}
 
 		if ( is_search() ) {
@@ -93,7 +93,7 @@ class Pronamic_WP_Sections_Plugin {
 		global $wp_query, $wpdb;
 
 		if ( is_admin() || ! is_main_query() ) {
-			return;
+			return $where;
 		}
 
 		if ( is_search() ) {
