@@ -68,6 +68,10 @@ class Pronamic_WP_Sections_Plugin {
 	public function posts_search_query_join( $join ) {
 		global $wpdb;
 
+		if ( is_admin() || ! is_main_query() ) {
+			return;
+		}
+
 		if ( is_search() ) {
 			$search_term = get_query_var( 's' , '' );
 
@@ -86,7 +90,11 @@ class Pronamic_WP_Sections_Plugin {
 	 * @return string
 	 */
 	public function posts_search_query_where( $where ) {
-		global $wpdb;
+		global $wp_query, $wpdb;
+
+		if ( is_admin() || ! is_main_query() ) {
+			return;
+		}
 
 		if ( is_search() ) {
 			$search_term = get_query_var( 's' , '' );
@@ -94,8 +102,14 @@ class Pronamic_WP_Sections_Plugin {
 			if ( ! empty( $search_term ) ) {
 				$where .= "OR ( wp_sections_posts.post_type = 'pronamic_section'
 						AND wp_sections_posts.post_status = 'publish'
-						AND wp_sections_posts.post_content LIKE '%{$search_term}%' )
-						GROUP BY {$wpdb->prefix}posts.id";
+						AND wp_sections_posts.post_content LIKE '%{$search_term}%'";
+
+				if( is_post_type_archive() ) {
+					$post_type = $wp_query->get( 'post_type' );
+					$where .= " AND {$wpdb->prefix}posts.post_type = '{$post_type}' ";
+				}
+
+				$where .= ") GROUP BY {$wpdb->prefix}posts.id";
 			}
 		}
 
