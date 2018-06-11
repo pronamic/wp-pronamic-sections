@@ -12,18 +12,18 @@ class Pronamic_WP_Sections_SectionFactory {
 	 * @return WP_Post|null
 	 */
 	public static function get_above_section( $post_id, $position ) {
-		$above_position = intval( $position );
-		$above_position--;
-
 		$above_section_query = new WP_Query( array(
 			'post_type'           => 'pronamic_section',
 			'post_parent'         => $post_id,
 			'posts_per_page'      => 1,
 			'ignore_sticky_posts' => true,
+			'orderby'             => 'meta_value_num',
+			'order'               => 'DESC',
 			'meta_query'          => array(
 				array(
-					'key'   => '_pronamic_section_position',
-					'value' => $above_position,
+					'key'      => '_pronamic_section_position',
+					'value'    => $position,
+					 'compare' => '<'
 				),
 			),
 		) );
@@ -47,18 +47,18 @@ class Pronamic_WP_Sections_SectionFactory {
 	 * @return WP_Post|null
 	 */
 	public static function get_below_section( $post_id, $position ) {
-		$below_position = intval( $position );
-		$below_position++;
-
 		$below_section_query = new WP_Query( array(
 			'post_type'           => 'pronamic_section',
 			'post_parent'         => $post_id,
 			'posts_per_page'      => 1,
 			'ignore_sticky_posts' => true,
+			'orderby'             => 'meta_value_num',
+			'order'               => 'ASC',
 			'meta_query'          => array(
 				array(
-					'key'   => '_pronamic_section_position',
-					'value' => $below_position,
+					'key'     => '_pronamic_section_position',
+					'value'   => $position,
+					'compare' => '>'
 				),
 			),
 		) );
